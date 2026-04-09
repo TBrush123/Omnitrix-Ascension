@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://7m6hoeihd4l"]
+
+[ext_resource type="Script" uid="uid://dql33a82lpcnb" path="res://Player/player.gd" id="1_gwnis"]
+[ext_resource type="Texture2D" uid="uid://cpuaiwpjhms2l" path="res://icon.svg" id="1_imvv5"]
+[ext_resource type="Script" uid="uid://ck4cpi2s0im5w" path="res://Player/Components/HealthComponent.gd" id="3_k53q1"]
+[ext_resource type="Script" uid="uid://ct3lnikh55pjt" path="res://Player/Components/OmnitrixComponent.gd" id="4_fhl08"]
+[ext_resource type="Script" uid="uid://dkiisy4yy88v5" path="res://Player/Aliens/alien_data.gd" id="5_k53q1"]
+[ext_resource type="Resource" uid="uid://bq661c5vffh3b" path="res://Player/Aliens/xlr8/xlr8.tres" id="6_fhl08"]
+[ext_resource type="Resource" uid="uid://dpdpnaqsht8ql" path="res://Player/Aliens/heatblast/heatblast.tres" id="7_od3ui"]
+[ext_resource type="Script" uid="uid://ogoiyocu8xvv" path="res://Player/Components/PlayerStats.gd" id="7_vtle1"]
+[ext_resource type="Resource" uid="uid://bpaykseme8wv2" path="res://Player/Aliens/stinkfly.tres" id="8_x3vf3"]
+[ext_resource type="Resource" uid="uid://bi8qgof8qbojl" path="res://Player/Aliens/wildmutt.tres" id="9_apopc"]
+[ext_resource type="Resource" uid="uid://dd8px7r1moxs3" path="res://Player/Aliens/upgrade.tres" id="10_apopc"]
+[ext_resource type="Resource" uid="uid://bjxamx3t3ua3w" path="res://Player/Aliens/diamondhead.tres" id="11_gu6f8"]
+[ext_resource type="Resource" uid="uid://bsnpv5yepfdy2" path="res://Player/Aliens/fourarms.tres" id="12_dkpta"]
+[ext_resource type="Resource" uid="uid://c51pkpajbpok1" path="res://Player/Aliens/ghostfreak.tres" id="13_lfmf2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gs3sa"]
+size = Vector2(127, 123)
+
+[node name="Player" type="CharacterBody2D" unique_id=540199118]
+script = ExtResource("1_gwnis")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1085158676]
+texture = ExtResource("1_imvv5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2128367502]
+position = Vector2(-0.5, 0.5)
+shape = SubResource("RectangleShape2D_gs3sa")
+
+[node name="AttackPivot" type="Node2D" parent="." unique_id=1174591231]
+
+[node name="Components" type="Node" parent="." unique_id=228143784]
+
+[node name="HealthComponent" type="Node2D" parent="Components" unique_id=365544497]
+script = ExtResource("3_k53q1")
+
+[node name="HurtboxComponent" type="Area2D" parent="Components" unique_id=799185113]
+
+[node name="InvincibilityComponent" type="Node2D" parent="Components" unique_id=1644981113]
+
+[node name="OmnitrixComponent" type="Node2D" parent="Components" unique_id=1814936505]
+script = ExtResource("4_fhl08")
+aliens = Array[ExtResource("5_k53q1")]([ExtResource("6_fhl08"), ExtResource("7_od3ui"), ExtResource("8_x3vf3"), ExtResource("9_apopc"), ExtResource("10_apopc"), ExtResource("11_gu6f8"), ExtResource("12_dkpta"), ExtResource("13_lfmf2")])
+
+[node name="PlayerStats" type="Node2D" parent="Components" unique_id=1533456369]
+script = ExtResource("7_vtle1")

@@ -1,0 +1,120 @@
+class_name OmnitrixWheel
+extends Control
+
+@export_group("Sound Settings")
+@export var switchingSFX: AudioStreamPlayer
+@export var activatingSFX: AudioStreamPlayer
+@export var transformSFX: AudioStreamPlayer
+
+@export_group("Wheel Settings")
+@export var radius: float = 365.0
+@export var rotation_speed: float = 12.0
+@export var scale_active: float = 0.18
+@export var scale_inactive: float = 0.15
+@export var alien_icons: Node2D
+
+var is_active: bool = false
+
+var aliens: Array[AlienData]
+var omnitrix_component: OmnitrixComponent
+
+const VISIBLE_SLOTS: int = 7
+const HALF: int = VISIBLE_SLOTS / 2 # 3
+const STEP: float = (2 * PI) / 10.0 # 36 degrees
+
+var icons = []
+var selected_index: int = 0
+var target_angle: float = 0.0
+var current_angle: float = 0.0
+
+func _ready():
+	if aliens.is_empty():
+		push_error("Add some alien textures to the array!")
+		return
+	selected_index = aliens.size() / 2
+	_setup_wheel()
+	hide()
+
+func connect_to(player_omnitrix_component: OmnitrixComponent):
+	omnitrix_component = player_omnitrix_component
+	omnitrix_component.toggle_wheel.connect(toggle_wheel)
+	omnitrix_component.alien_transform.connect(transform)
+	aliens = omnitrix_component.aliens 
+
+
+func find_alien_at_index(index: int) -> Texture2D:
+	return aliens[((index % aliens.size()) + aliens.size()) % aliens.size()].texture
+
+func _setup_wheel():
+	for i in range(VISIBLE_SLOTS):
+		var icon = Sprite2D.new()
+		icon.scale = Vector2.ONE * scale_inactive
+		icon.texture = find_alien_at_index(selected_index - HALF + i)
+		alien_icons.add_child(icon)
+		icons.append(icon)
+
+func _input(event):
+	var dir = 0
+	if event.is_action_pressed("ui_right"): dir = 1
+	if event.is_action_pressed("ui_left"): dir = -1
+	if dir != 0 and is_active:
+		switchingSFX.pitch_scale = randf_range(0.9, 1.1)
+		switchingSFX.play()
+		# 1. Update the logical selection (using posmod logic for safety)
+		selected_index = ((selected_index + dir) % aliens.size() + aliens.size()) % aliens.size()
+		# 2. Shift the icons array and update ONLY the texture that wrapped around
+		if dir == 1:
+			var icon = icons.pop_front()
+			icon.texture = find_alien_at_index(selected_index + HALF)
+			icons.append(icon)
+		else:
+			var icon = icons.pop_back()
+			icon.texture = find_alien_at_index(selected_index - HALF)
+			icons.push_front(icon)
+		current_angle += dir * STEP
+		
+
+func _process(delta):
+	current_angle = lerp_angle(current_angle, target_angle, delta * rotation_speed)
+	_draw_wheel()
+
+func _draw_wheel():
+	for i in range(VISIBLE_SLOTS):
+		var angle = ((i - HALF) * STEP) + current_angle - (PI / 2) # Start from the top
+		icons[i].position = Vector2(cos(angle), sin(angle)) * radius
+		icons[i].rotation = angle + (PI / 2)
+
+		var angle_diff = abs(angle_difference(angle, -PI / 2))
+		if angle_diff < 0.2:
+			icons[i].scale = icons[i].scale.lerp(Vector2.ONE * scale_active, 0.2)
+		else:
+			icons[i].scale = icons[i].scale.lerp(Vector2.ONE * scale_inactive, 0.2)
+
+func get_active_alien_index():
+	return selected_index
+
+func toggle_wheel(should_show: bool):
+	is_active = should_show
+	if is_active:
+		activatingSFX.play()
+	
+	# Create a tween for smooth movement
+	var tween = create_tween().set_parallel(true).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	
+	if is_active:
+		self.show()
+		# Pop scale from 0 to 1 with a "Back" ease (slight overshoot for "pop" effect)
+		tween.tween_property(self, "modulate:a", 1.0, 0.2)
+	else:
+		# Shrink and fade away
+		var shrink_tween = create_tween().set_parallel(true).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
+		shrink_tween.tween_property(self, "modulate:a", 0.0, 0.2)
+		shrink_tween.chain().tween_callback(hide)
+
+func transform(alien: AlienData):
+	transformSFX.play()
+	var tween = create_tween().set_parallel(true).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	self.show()
+	tween.tween_property(self, "modulate:a", 0.0, 0.2)
+	tween.chain().tween_callback(hide)
+	is_active = false

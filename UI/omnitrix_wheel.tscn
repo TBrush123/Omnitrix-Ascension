@@ -1,0 +1,101 @@
+[gd_scene format=3 uid="uid://ca51qv0r437do"]
+
+[ext_resource type="Script" uid="uid://msg65h070aq5" path="res://UI/omnitrix_wheel.gd" id="1_g6hd2"]
+[ext_resource type="Texture2D" uid="uid://ch7q3mdua6tqd" path="res://Assets/omnitrix_wheel_top.png" id="2_mepqo"]
+[ext_resource type="Texture2D" uid="uid://dbp8pnkcs08vw" path="res://Assets/omnitrix_wheel_bottom.png" id="3_dgv0a"]
+[ext_resource type="Texture2D" uid="uid://c4jvpesw5afym" path="res://Assets/omnitrix_wheel_selector.png" id="4_351yj"]
+[ext_resource type="Shader" uid="uid://d0vpjqt5wsgr1" path="res://UI/invert.gdshader" id="5_3u6hv"]
+[ext_resource type="Texture2D" uid="uid://bd3ehyj2s3nrx" path="res://Assets/omnitrix_wheel.png" id="7_52wv3"]
+[ext_resource type="AudioStream" uid="uid://76lrwhyf7j7l" path="res://Assets/SFX/activation.wav" id="8_3u6hv"]
+[ext_resource type="AudioStream" uid="uid://qqgf1s83lbuw" path="res://Assets/SFX/transform.wav" id="9_52wv3"]
+[ext_resource type="AudioStream" uid="uid://bm4ungsvqlgse" path="res://Assets/SFX/switching.wav" id="16_nxb2f"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qevwu"]
+shader = ExtResource("5_3u6hv")
+
+[node name="OmnitrixWheel" type="Control" unique_id=1076065873 node_paths=PackedStringArray("switchingSFX", "activatingSFX", "transformSFX", "alien_icons")]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_g6hd2")
+switchingSFX = NodePath("SwitchingSFX")
+activatingSFX = NodePath("ActivationSFX")
+transformSFX = NodePath("AudioStreamPlayer")
+alien_icons = NodePath("AlienIcons")
+
+[node name="TextureRect2" type="TextureRect" parent="." unique_id=1532187377]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -500.0
+offset_top = -500.0
+offset_right = 500.0
+offset_bottom = 500.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_mepqo")
+
+[node name="AlienIcons" type="Node2D" parent="." unique_id=1636995698]
+
+[node name="TextureRect4" type="TextureRect" parent="." unique_id=1805974018]
+material = SubResource("ShaderMaterial_qevwu")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -500.0
+offset_top = -500.0
+offset_right = 500.0
+offset_bottom = 500.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_351yj")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1076792556]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -500.0
+offset_top = -500.0
+offset_right = 500.0
+offset_bottom = 500.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_dgv0a")
+
+[node name="TextureRect3" type="TextureRect" parent="." unique_id=887916856]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -500.0
+offset_top = -500.0
+offset_right = 500.0
+offset_bottom = 500.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_52wv3")
+
+[node name="SwitchingSFX" type="AudioStreamPlayer" parent="." unique_id=1179847684]
+stream = ExtResource("16_nxb2f")
+
+[node name="ActivationSFX" type="AudioStreamPlayer" parent="." unique_id=1976170184]
+stream = ExtResource("8_3u6hv")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=512627289]
+stream = ExtResource("9_52wv3")

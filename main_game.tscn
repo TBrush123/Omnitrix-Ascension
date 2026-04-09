@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://b2rgcpt4c4s8g"]
+
+[ext_resource type="PackedScene" uid="uid://7m6hoeihd4l" path="res://Player/player.tscn" id="1_yx7mw"]
+[ext_resource type="PackedScene" uid="uid://ca51qv0r437do" path="res://UI/omnitrix_wheel.tscn" id="2_ykeeq"]
+[ext_resource type="PackedScene" uid="uid://kp566ecivo83" path="res://Enemies/enemy.tscn" id="3_ykeeq"]
+
+[node name="MainGame" type="Node2D" unique_id=13256596]
+position = Vector2(1, 0)
+
+[node name="Enemy" parent="." unique_id=578988503 instance=ExtResource("3_ykeeq")]
+position = Vector2(950, 401)
+
+[node name="Player" parent="." unique_id=540199118 node_paths=PackedStringArray("omnitrix_wheel") instance=ExtResource("1_yx7mw")]
+omnitrix_wheel = NodePath("../UI/OmnitrixWheel")
+
+[node name="UI" type="Control" parent="." unique_id=1541917459]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="OmnitrixWheel" parent="UI" unique_id=1076065873 instance=ExtResource("2_ykeeq")]
+layout_mode = 1

@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://015b2jj1dbc1"]
+
+[ext_resource type="Script" uid="uid://dtffbk62djcnr" path="res://Player/Aliens/xlr8/xlr_8_melee.gd" id="1_tetca"]
+[ext_resource type="Texture2D" uid="uid://dxbep431qnek2" path="res://Assets/Alien Attacks/XLR8Melee.png" id="2_ou2au"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tpdjs"]
+radius = 50.0
+height = 300.0
+
+[node name="XLR8Melee" type="Area2D" unique_id=1883671156]
+script = ExtResource("1_tetca")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1653772243]
+position = Vector2(20, 0)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_tpdjs")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1926032831]
+texture = ExtResource("2_ou2au")
+offset = Vector2(20, 0)

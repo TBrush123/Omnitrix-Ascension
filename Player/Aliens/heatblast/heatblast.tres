@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="AlienData" format=3 uid="uid://dpdpnaqsht8ql"]
+
+[ext_resource type="Script" uid="uid://dkiisy4yy88v5" path="res://Player/Aliens/alien_data.gd" id="1_1fdt5"]
+[ext_resource type="PackedScene" uid="uid://b77cr7x5ay0bo" path="res://Player/Aliens/heatblast/heatblast_melee.tscn" id="1_h2wa1"]
+[ext_resource type="Texture2D" uid="uid://b2ylalh64xavs" path="res://Assets/Alien Icons/heatblast.png" id="2_msmll"]
+
+[resource]
+script = ExtResource("1_1fdt5")
+alien_name = "Heatblast"
+texture = ExtResource("2_msmll")
+attack_instance = ExtResource("1_h2wa1")
+metadata/_custom_type_script = "uid://dkiisy4yy88v5"

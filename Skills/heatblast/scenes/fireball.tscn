@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://b6kfntneblcjm"]
+
+[ext_resource type="Script" uid="uid://bqq3xebspyweg" path="res://Skills/heatblast/scenes/fireball.gd" id="1_dmody"]
+[ext_resource type="Texture2D" uid="uid://bydged4y4kf5o" path="res://Assets/Alien Attacks/fireball.png" id="2_s2jx7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_88t8y"]
+radius = 17.029387
+
+[node name="Fireball" type="Area2D" unique_id=913596508]
+script = ExtResource("1_dmody")
+metadata/_custom_type_script = "uid://co8xmsp0ewepc"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1112227274]
+texture = ExtResource("2_s2jx7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=592521241]
+position = Vector2(12, -1)
+shape = SubResource("CircleShape2D_88t8y")
+debug_color = Color(0.23835218, 0.7939383, 0, 0.41960785)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=551895945]
+position = Vector2(11, -2)
+rect = Rect2(-16, -18, 34, 37)

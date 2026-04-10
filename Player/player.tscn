@@ -14,6 +14,7 @@
 [ext_resource type="Resource" uid="uid://bjxamx3t3ua3w" path="res://Player/Aliens/diamondhead.tres" id="11_gu6f8"]
 [ext_resource type="Resource" uid="uid://bsnpv5yepfdy2" path="res://Player/Aliens/fourarms.tres" id="12_dkpta"]
 [ext_resource type="Resource" uid="uid://c51pkpajbpok1" path="res://Player/Aliens/ghostfreak.tres" id="13_lfmf2"]
+[ext_resource type="Script" uid="uid://bjyuue8v1oqsm" path="res://Skills/skill_executor.gd" id="15_dkpta"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gs3sa"]
 size = Vector2(127, 123)
@@ -30,7 +31,7 @@ shape = SubResource("RectangleShape2D_gs3sa")
 
 [node name="AttackPivot" type="Node2D" parent="." unique_id=1174591231]
 
-[node name="Components" type="Node" parent="." unique_id=228143784]
+[node name="Components" type="Node2D" parent="." unique_id=514588162]
 
 [node name="HealthComponent" type="Node2D" parent="Components" unique_id=365544497]
 script = ExtResource("3_k53q1")
@@ -45,3 +46,7 @@ aliens = Array[ExtResource("5_k53q1")]([ExtResource("6_fhl08"), ExtResource("7_o
 
 [node name="PlayerStats" type="Node2D" parent="Components" unique_id=1533456369]
 script = ExtResource("7_vtle1")
+
+[node name="SkillExecutor" type="Node2D" parent="Components" unique_id=2077526957]
+script = ExtResource("15_dkpta")
+metadata/_custom_type_script = "uid://bjyuue8v1oqsm"

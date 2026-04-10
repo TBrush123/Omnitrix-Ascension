@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://srss0rigdux7"]
+
+[ext_resource type="Script" uid="uid://chmuresqs516g" path="res://Skills/heatblast/scenes/fireball_barrage.gd" id="1_ceu8i"]
+[ext_resource type="PackedScene" uid="uid://b6kfntneblcjm" path="res://Skills/heatblast/scenes/fireball.tscn" id="2_0mwbr"]
+
+[node name="FireballBarrage" type="Node2D" unique_id=1086286175]
+script = ExtResource("1_ceu8i")
+fireball_scene = ExtResource("2_0mwbr")

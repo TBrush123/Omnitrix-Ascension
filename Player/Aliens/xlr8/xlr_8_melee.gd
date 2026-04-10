@@ -11,7 +11,7 @@ func _on_spawned() -> void:
 		direction = direction.rotated(deg_to_rad(30))
 
 	lifetime = 0.12
-	knockback_force = 120.0
+	knockback_force = 80.0
 	_start_lifetime()
 
 	var tween = create_tween()
@@ -33,5 +33,16 @@ func _spawn_second_hit() -> void:
 	second._is_combo_hit = true
 	second.position = position
 	second.direction = direction
-	second.damage = damage * 0.7
+	second.damage = damage * 1.2
 	get_parent().add_child(second)
+
+func _on_hit(enemy: Node) -> void:
+	print("XLR8 melee hit: ", enemy.name)
+	if enemy.has_method("apply_knockback"):
+		var hit_direction = (enemy.global_position - global_position).normalized()
+		if _is_combo_hit:
+			enemy.apply_knockback(hit_direction, knockback_force * 0.8)
+		else:
+			enemy.apply_knockback(hit_direction, knockback_force * 0.2)
+	if enemy.has_node("HealthComponent"):
+		enemy.get_node("HealthComponent").take_damage(damage)

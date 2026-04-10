@@ -32,7 +32,7 @@ func _on_area_entered(area: Area2D) -> void:
 		enemy.get_node('HealthComponent').take_damage(damage)
 	
 	if enemy.has_method('apply_knockback'):
-		enemy.apply_knockback(direction * knockback_force)
+		enemy.apply_knockback(direction, knockback_force)
 
 	_on_hit(enemy)
 

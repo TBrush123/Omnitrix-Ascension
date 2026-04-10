@@ -1,15 +1,13 @@
 class_name Player
 extends CharacterBody2D
 
-# ─────────────────────────────────────────
-#  Component references
-# ─────────────────────────────────────────
 @onready var sprite:              Sprite2D              = $Sprite2D
 @onready var attack_pivot:        Node2D                = $AttackPivot
 @onready var health_component:    HealthComponent       = $Components/HealthComponent
 @onready var omnitrix:            OmnitrixComponent     = $Components/OmnitrixComponent
 @onready var stats:               PlayerStats           = $Components/PlayerStats
 @onready var hurtbox:             Area2D                = $Components/HurtboxComponent
+@onready var skill_executor: SkillExecutor = $Components/SkillExecutor
 
 # ─────────────────────────────────────────
 # External references
@@ -27,8 +25,7 @@ func _ready() -> void:
 	hurtbox.area_entered.connect(_on_hurtbox_entered)
 	omnitrix_wheel.connect_to(omnitrix) 
 	omnitrix.connect_to(omnitrix_wheel)
-	# Apply the starting alien immediately
-
+	_on_alien_changed(omnitrix.get_active())
 
 func _process(delta: float) -> void:
 	_handle_attack_cooldown(delta)
@@ -58,6 +55,7 @@ func _handle_attack_cooldown(delta: float) -> void:
 
 
 func _handle_attack_input() -> void:
+	var dir = _get_attack_direction()
 	if _attack_cooldown_remaining > 0:
 		return
 	if omnitrix._wheel_open:
@@ -67,10 +65,13 @@ func _handle_attack_input() -> void:
 	
 	if Input.is_action_just_pressed("attack"):
 		_perform_attack()
+	if Input.is_action_just_pressed("skill_primary"):
+		skill_executor.try_use(0, dir)
+	if Input.is_action_just_pressed("skill_secondary"):
+		skill_executor.try_use(1, dir)
 
 
 func _perform_attack() -> void:
-	print("1")
 	var alien: AlienData = omnitrix.get_active()
 	if alien.attack_instance == null:
 		return
@@ -143,6 +144,7 @@ func _on_alien_changed(alien: AlienData) -> void:
 	sprite.texture    = alien.texture
 	sprite.scale      = alien.scale_modifier
 	stats.active_alien = alien   # PlayerStats factors in alien modifiers
+	skill_executor.load_alien(alien)
 
 	# Swap attack scene
 	if _current_attack_instance:

@@ -1,5 +1,5 @@
 class_name Enemy
-extends Node
+extends CharacterBody2D
 
 @export var health_component: HealthComponent
 
@@ -17,3 +17,14 @@ func _on_health_changed(new_health: int):
 func _on_died():
 	print("Enemy died")
 	queue_free()
+
+func apply_knockback(direction: Vector2, force: float):
+	velocity += direction * force
+
+
+func _physics_process(delta: float):
+	# Apply knockback velocity
+	if velocity.length() > 0:
+		move_and_slide()
+
+	velocity = velocity.move_toward(Vector2.ZERO, 500 * delta)  # Dampen knockback over time

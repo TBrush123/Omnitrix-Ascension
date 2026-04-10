@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dkiisy4yy88v5" path="res://Player/Aliens/alien_data.gd" id="1_1fdt5"]
 [ext_resource type="PackedScene" uid="uid://b77cr7x5ay0bo" path="res://Player/Aliens/heatblast/heatblast_melee.tscn" id="1_h2wa1"]
+[ext_resource type="Resource" uid="uid://b6av04xhr5e3w" path="res://Skills/heatblast/data/heatblast_primary.tres" id="2_aokjt"]
 [ext_resource type="Texture2D" uid="uid://b2ylalh64xavs" path="res://Assets/Alien Icons/heatblast.png" id="2_msmll"]
 
 [resource]
@@ -9,4 +10,5 @@ script = ExtResource("1_1fdt5")
 alien_name = "Heatblast"
 texture = ExtResource("2_msmll")
 attack_instance = ExtResource("1_h2wa1")
+primary_skill = ExtResource("2_aokjt")
 metadata/_custom_type_script = "uid://dkiisy4yy88v5"

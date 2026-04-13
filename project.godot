@@ -13,7 +13,7 @@ config_version=5
 config/name="Omnitrix Ascension"
 run/main_scene="uid://b2rgcpt4c4s8g"
 config/features=PackedStringArray("4.6", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://c6o0yvgtxa6k1"
 
 [display]
 

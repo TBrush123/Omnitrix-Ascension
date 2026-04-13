@@ -18,6 +18,7 @@ extends CharacterBody2D
 # ─────────────────────────────────────────
 var _attack_cooldown_remaining: float = 0.0
 var _current_attack_instance:   Node  = null
+var _transform_tween: Tween = null
 
 func _ready() -> void:
 	omnitrix.alien_transform.connect(_on_alien_changed)
@@ -141,10 +142,10 @@ func _apply_knockback(source_position: Vector2) -> void:
 #  Alien switching callbacks
 # ─────────────────────────────────────────
 func _on_alien_changed(alien: AlienData) -> void:
-	sprite.texture    = alien.texture
-	sprite.scale      = alien.scale_modifier
 	stats.active_alien = alien   # PlayerStats factors in alien modifiers
 	skill_executor.load_alien(alien)
+	_play_transform_effect(alien)   # ← replaces the old sprite swap
+
 
 	# Swap attack scene
 	if _current_attack_instance:
@@ -158,3 +159,35 @@ func _on_died() -> void:
 	#RunManager.on_player_died()
 	#queue_free()
 	pass
+
+func _play_transform_effect(alien: AlienData) -> void:
+
+	if _transform_tween:
+		_transform_tween.kill()
+	
+	_transform_tween = create_tween().set_parallel(false)
+
+	_transform_tween.tween_property(sprite, "modulate", Color(0.3, 1.0, 0.4, 1.0), 0.07)
+	_transform_tween.tween_property(sprite, "scale", alien.scale_modifier * 1.35, 0.07)
+
+	_transform_tween.tween_callback(func():
+		sprite.texture = alien.texture
+		sprite.scale = alien.scale_modifier * 1.35
+		_spawn_transform_ring()
+	)
+
+	_transform_tween.tween_property(sprite, "scale", alien.scale_modifier, 0.10)
+	_transform_tween.tween_property(sprite, "modulate", Color.WHITE, 0.08)
+
+	
+func _spawn_transform_ring() -> void:
+	var ring = Sprite2D.new()
+	ring.texture  = sprite.texture
+	ring.modulate = Color(0.3, 1.0, 0.4, 0.6)
+	ring.scale    = sprite.scale
+	add_child(ring)
+
+	var tween = create_tween().set_parallel(true)
+	tween.tween_property(ring, "scale",    sprite.scale * 2.5, 0.25)
+	tween.tween_property(ring, "modulate", Color(0.3, 1.0, 0.4, 0.0), 0.25)
+	tween.tween_callback(ring.queue_free).set_delay(0.25)

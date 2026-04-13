@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://bianxfsm7www1"]
+
+[ext_resource type="Script" uid="uid://y4786boqavsk" path="res://UI/hourglass_hud.gd" id="1_5i77y"]
+[ext_resource type="Texture2D" uid="uid://cnyjh8q0qmt44" path="res://Assets/Misc/Omnitrix_charge.png" id="1_ne75i"]
+[ext_resource type="Texture2D" uid="uid://old2w4et0mif" path="res://Assets/Misc/Hourglass_fill.png" id="2_bytes"]
+[ext_resource type="Texture2D" uid="uid://cknkrf4y8u31r" path="res://Assets/Misc/Hourglass_under.png" id="2_rnl6m"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1ui3w"]
+
+[node name="HUD" type="Control" unique_id=1459615035]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5i77y")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1924828320]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="MarginContainer" unique_id=51019694]
+material = SubResource("ShaderMaterial_1ui3w")
+layout_mode = 2
+value = 64.0
+fill_mode = 3
+texture_under = ExtResource("2_rnl6m")
+texture_over = ExtResource("1_ne75i")
+texture_progress = ExtResource("2_bytes")

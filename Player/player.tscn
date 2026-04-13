@@ -15,12 +15,14 @@
 [ext_resource type="Resource" uid="uid://bsnpv5yepfdy2" path="res://Player/Aliens/fourarms.tres" id="12_dkpta"]
 [ext_resource type="Resource" uid="uid://c51pkpajbpok1" path="res://Player/Aliens/ghostfreak.tres" id="13_lfmf2"]
 [ext_resource type="Script" uid="uid://bjyuue8v1oqsm" path="res://Skills/skill_executor.gd" id="15_dkpta"]
+[ext_resource type="Script" uid="uid://b21dmnkdrqb7b" path="res://Player/Components/alien_charge_component.gd" id="16_lfmf2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gs3sa"]
 size = Vector2(127, 123)
 
 [node name="Player" type="CharacterBody2D" unique_id=540199118]
 script = ExtResource("1_gwnis")
+human_sprite = ExtResource("1_imvv5")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1085158676]
 texture = ExtResource("1_imvv5")
@@ -50,3 +52,6 @@ script = ExtResource("7_vtle1")
 [node name="SkillExecutor" type="Node2D" parent="Components" unique_id=2077526957]
 script = ExtResource("15_dkpta")
 metadata/_custom_type_script = "uid://bjyuue8v1oqsm"
+
+[node name="AlienChargeComponent" type="Node2D" parent="Components" unique_id=12498618]
+script = ExtResource("16_lfmf2")

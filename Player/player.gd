@@ -1,6 +1,8 @@
 class_name Player
 extends CharacterBody2D
 
+@export var human_sprite: Texture2D
+
 @onready var sprite:              Sprite2D              = $Sprite2D
 @onready var attack_pivot:        Node2D                = $AttackPivot
 @onready var health_component:    HealthComponent       = $Components/HealthComponent
@@ -8,10 +10,12 @@ extends CharacterBody2D
 @onready var stats:               PlayerStats           = $Components/PlayerStats
 @onready var hurtbox:             Area2D                = $Components/HurtboxComponent
 @onready var skill_executor: SkillExecutor = $Components/SkillExecutor
+@onready var alien_charge: AlienChargeComponent = $Components/AlienChargeComponent
 
 # ─────────────────────────────────────────
 # External references
 @export var omnitrix_wheel: OmnitrixWheel
+@export var charge_hud: AlienChargeHUD
 
 # ─────────────────────────────────────────
 #  Internal state
@@ -26,7 +30,10 @@ func _ready() -> void:
 	hurtbox.area_entered.connect(_on_hurtbox_entered)
 	omnitrix_wheel.connect_to(omnitrix) 
 	omnitrix.connect_to(omnitrix_wheel)
-	_on_alien_changed(omnitrix.get_active())
+	alien_charge.charge_depleted.connect(_on_charge_depleted)
+	alien_charge.charge_recharged.connect(_on_charge_recharged)
+	charge_hud.connect_to(alien_charge)
+
 
 func _process(delta: float) -> void:
 	_handle_attack_cooldown(delta)
@@ -142,9 +149,16 @@ func _apply_knockback(source_position: Vector2) -> void:
 #  Alien switching callbacks
 # ─────────────────────────────────────────
 func _on_alien_changed(alien: AlienData) -> void:
+	if alien == null:
+		sprite.texture = human_sprite
+		sprite.scale = Vector2.ONE
+		alien_charge.set_transformed(false)
+		_play_detransform_effect()
+		return
 	stats.active_alien = alien   # PlayerStats factors in alien modifiers
 	skill_executor.load_alien(alien)
 	_play_transform_effect(alien)   # ← replaces the old sprite swap
+	alien_charge.set_transformed(true)
 
 
 	# Swap attack scene
@@ -191,3 +205,16 @@ func _spawn_transform_ring() -> void:
 	tween.tween_property(ring, "scale",    sprite.scale * 2.5, 0.25)
 	tween.tween_property(ring, "modulate", Color(0.3, 1.0, 0.4, 0.0), 0.25)
 	tween.tween_callback(ring.queue_free).set_delay(0.25)
+
+func _on_charge_depleted() -> void:
+	alien_charge.set_transformed(false)
+	omnitrix.force_detransform()
+	_play_detransform_effect()
+
+func _on_charge_recharged() -> void:
+	pass
+	#TODO
+
+func _play_detransform_effect() -> void:
+	pass
+	#TODO

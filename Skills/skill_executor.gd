@@ -35,6 +35,8 @@ func _execute(skill: SkillData, direction: Vector2) -> void:
 	var instance = skill.skill_scene.instantiate()
 	instance.direction = direction
 	instance.damage = _stats.get_stat("damage")
+	if instance.get("momentum_stacks") != null:
+		instance.momentum_stacks = get_parent().get_node("MomentumComponent").current_stacks
 
 	if instance.has_method("apply_upgrade"):
 		instance.apply_upgrade(skill)

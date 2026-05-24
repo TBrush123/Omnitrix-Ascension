@@ -1,11 +1,12 @@
 class_name StatModifier
 extends Resource
 
-enum ModifierType {
+enum Type {
     FLAT,
     PERCENT
 }
 
 @export var stat: String
-@export var type: ModifierType
+@export var type: Type
 @export var value: float
+@export var source: String = ""

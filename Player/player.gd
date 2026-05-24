@@ -9,10 +9,10 @@ extends CharacterBody2D
 @onready var omnitrix:            OmnitrixComponent     = $Components/OmnitrixComponent
 @onready var stats:               PlayerStats           = $Components/PlayerStats
 @onready var hurtbox:             Area2D                = $Components/HurtboxComponent
-@onready var invincibility: InvincibilityComponent = $Components/InvincibilityComponent
-@onready var skill_executor: SkillExecutor = $Components/SkillExecutor
-@onready var alien_charge: AlienChargeComponent = $Components/AlienChargeComponent
-
+@onready var invincibility: 	  InvincibilityComponent = $Components/InvincibilityComponent
+@onready var skill_executor: 	  SkillExecutor = $Components/SkillExecutor
+@onready var alien_charge:        AlienChargeComponent = $Components/AlienChargeComponent
+@onready var momentum: 		MomentumComponent = $Components/MomentumComponent
 # ─────────────────────────────────────────
 # External references
 @export var omnitrix_wheel: OmnitrixWheel
@@ -94,6 +94,10 @@ func _perform_attack() -> void:
 	hitbox.position   = Vector2.ZERO     # offset handled inside the hitbox scene itself
 	hitbox.direction  = attack_dir
 	hitbox.damage     = stats.get_stat("damage")
+
+	if hitbox.get("_momentum_stacks") != null:
+		hitbox._momentum_stacks = momentum.current_stacks
+		
 	add_child(hitbox)
 
 	_current_attack_instance   = hitbox
@@ -202,6 +206,7 @@ func _on_alien_changed(alien: AlienData) -> void:
 	if alien == null:
 		sprite.texture = human_sprite
 		sprite.scale = Vector2.ONE
+		stats.active_alien = null
 		alien_charge.set_transformed(false)
 		_play_detransform_effect()
 		return

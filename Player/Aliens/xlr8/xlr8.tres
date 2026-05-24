@@ -2,12 +2,19 @@
 
 [ext_resource type="PackedScene" uid="uid://015b2jj1dbc1" path="res://Player/Aliens/xlr8/xlr_8_melee.tscn" id="1_5ugsg"]
 [ext_resource type="Script" uid="uid://dkiisy4yy88v5" path="res://Player/Aliens/alien_data.gd" id="2_jvjyx"]
+[ext_resource type="Resource" uid="uid://cwv3tn4ubo7ul" path="res://Skills/xlr8/data/tornado_dash.tres" id="2_p3rqm"]
 [ext_resource type="Texture2D" uid="uid://b5g3328yqnoqd" path="res://Assets/Alien Icons/xlr8.png" id="3_p3rqm"]
+[ext_resource type="Resource" uid="uid://c5klkfo54wje1" path="res://Skills/xlr8/data/speed_vortex.tres" id="4_p3rqm"]
 
 [resource]
 script = ExtResource("2_jvjyx")
 alien_name = "XLR8"
 texture = ExtResource("3_p3rqm")
 attack_instance = ExtResource("1_5ugsg")
+primary_skill = ExtResource("2_p3rqm")
+secondary_skill = ExtResource("4_p3rqm")
 passive_trait = "speed_trail"
+stat_modifiers = {
+"move_speed": 150.0
+}
 metadata/_custom_type_script = "uid://dkiisy4yy88v5"

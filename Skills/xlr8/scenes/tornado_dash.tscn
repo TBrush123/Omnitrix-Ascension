@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bij7ruqmcmyyh"]
+
+[ext_resource type="Script" uid="uid://y77lr0g061ji" path="res://Skills/xlr8/scenes/tornado_dash.gd" id="1_i840j"]
+
+[node name="TornadoDash" type="Node2D" unique_id=85287605]
+script = ExtResource("1_i840j")

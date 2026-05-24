@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://ciltrt5ytf5eu"]
+
+[ext_resource type="Script" uid="uid://bv2qqjs3t335p" path="res://Skills/greymatter/scenes/emp_grenade.gd" id="1_t5swb"]
+[ext_resource type="PackedScene" uid="uid://cnhfsvl5vb48m" path="res://Skills/greymatter/scenes/emp_burst_vfx.tscn" id="2_i3bhn"]
+[ext_resource type="Texture2D" uid="uid://bydged4y4kf5o" path="res://Assets/Alien Attacks/fireball.png" id="2_p6bcr"]
+
+[node name="EMPGrenade" type="Node2D" unique_id=866371035]
+script = ExtResource("1_t5swb")
+emp_burst_vfx = ExtResource("2_i3bhn")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1667054453]
+texture = ExtResource("2_p6bcr")
+
+[node name="Shadow" type="Sprite2D" parent="." unique_id=1171512461]
+modulate = Color(0, 0, 0, 1)
+texture = ExtResource("2_p6bcr")

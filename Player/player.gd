@@ -9,6 +9,7 @@ extends CharacterBody2D
 @onready var omnitrix:            OmnitrixComponent     = $Components/OmnitrixComponent
 @onready var stats:               PlayerStats           = $Components/PlayerStats
 @onready var hurtbox:             Area2D                = $Components/HurtboxComponent
+@onready var invincibility: InvincibilityComponent = $Components/InvincibilityComponent
 @onready var skill_executor: SkillExecutor = $Components/SkillExecutor
 @onready var alien_charge: AlienChargeComponent = $Components/AlienChargeComponent
 
@@ -132,13 +133,62 @@ func _on_hurtbox_entered(area: Area2D) -> void:
 		take_damage(dmg, area.global_position)
 
 
-func take_damage(amount: int, source_position: Vector2 = global_position) -> void:
+func take_damage(amount: int, source_position: Vector2 = global_position, attacker: Node = null) -> void:
 	#if invincibility.is_invincible:
-	#	return
+	#	retur
+	if get_meta("dodge_window_active", false):
+		_trigger_dodge_payoff(attacker)
+		return
 	health_component.take_damage(amount)
-	#invincibility.activate()
+	invincibility.activate()
 	_apply_knockback(source_position)
 
+func _trigger_dodge_payoff(attacker: Node) -> void:
+	# Clear the window so it can only trigger once
+	set_meta("dodge_window_active", false)
+
+	# Reset Sabotage (skill slot 0) cooldown
+	skill_executor.reset_cooldown(0)
+
+	# Confuse the attacker
+	if attacker != null and attacker.has_method("apply_confusion"):
+		attacker.apply_confusion(3.0)
+
+	# Satisfying feedback — brief freeze frame + flash
+	_dodge_success_effect()
+
+
+func _dodge_success_effect() -> void:
+	# Freeze frame: slow time very briefly
+	Engine.time_scale = 0.05
+	get_tree().create_timer(0.08, true, false, true).timeout.connect(
+		func(): Engine.time_scale = 1.0
+	)
+
+	# White flash on player
+	var tween = create_tween()
+	tween.tween_property($Sprite2D, "modulate",
+		Color(2.0, 2.0, 2.0, 1.0), 0.04)
+	tween.tween_property($Sprite2D, "modulate",
+		Color.WHITE, 0.12)
+
+	# Floating text "DODGE!" above player
+	_spawn_floating_text("DODGE!")
+
+
+func _spawn_floating_text(text: String) -> void:
+	var label       = Label.new()
+	label.text      = text
+	label.modulate  = Color(0.3, 1.0, 0.4)
+	get_tree().current_scene.add_child(label)
+	label.global_position = global_position + Vector2(-20, -40)
+
+	var tween = create_tween().set_parallel(true)
+	tween.tween_property(label, "position:y",
+		label.position.y - 30, 0.6)
+	tween.tween_property(label, "modulate:a", 0.0, 0.6) \
+		.set_delay(0.2)
+	tween.tween_callback(label.queue_free).set_delay(0.6)
 
 func _apply_knockback(source_position: Vector2) -> void:
 	var dir = (global_position - source_position).normalized()
@@ -185,7 +235,10 @@ func _play_transform_effect(alien: AlienData) -> void:
 	_transform_tween.tween_property(sprite, "scale", alien.scale_modifier * 1.35, 0.07)
 
 	_transform_tween.tween_callback(func():
-		sprite.texture = alien.texture
+		if alien.sprite_texture:
+			sprite.texture = alien.sprite_texture
+		else:
+			sprite.texture = alien.texture
 		sprite.scale = alien.scale_modifier * 1.35
 		_spawn_transform_ring()
 	)

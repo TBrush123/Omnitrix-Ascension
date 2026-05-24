@@ -8,5 +8,6 @@ extends Resource
 @export var primary_skill: SkillData
 @export var secondary_skill: SkillData
 @export var passive_trait: String       = ""  # resolved by PassiveSystem later
+@export var sprite_texture: Texture2D
 
 @export var stat_modifiers: Dictionary = {}

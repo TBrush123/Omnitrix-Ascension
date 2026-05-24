@@ -9,9 +9,10 @@
 position = Vector2(1, 0)
 
 [node name="Enemy" parent="." unique_id=578988503 instance=ExtResource("3_ykeeq")]
-position = Vector2(315, 152)
+position = Vector2(1163, 605)
 
 [node name="Player" parent="." unique_id=540199118 node_paths=PackedStringArray("omnitrix_wheel", "charge_hud") instance=ExtResource("1_yx7mw")]
+position = Vector2(771, 656)
 omnitrix_wheel = NodePath("../UI/OmnitrixWheel")
 charge_hud = NodePath("../UI/HUD")
 

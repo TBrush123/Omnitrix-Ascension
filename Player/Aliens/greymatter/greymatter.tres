@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="AlienData" format=3 uid="uid://cxy1wckw2rrlg"]
+
+[ext_resource type="PackedScene" uid="uid://st3ughxgn8op" path="res://Player/Aliens/greymatter/greymatter_melee.tscn" id="1_fv5s2"]
+[ext_resource type="Script" uid="uid://dkiisy4yy88v5" path="res://Player/Aliens/alien_data.gd" id="1_ss0at"]
+[ext_resource type="Texture2D" uid="uid://dkavp4ntv41s2" path="res://Assets/Alien Sprites/greymatter.png" id="2_1jjkb"]
+[ext_resource type="Resource" uid="uid://dakehpdknmnug" path="res://Skills/greymatter/data/sabotage_hotwire.tres" id="2_rfwnx"]
+[ext_resource type="Texture2D" uid="uid://lilk0tb3i3pd" path="res://Assets/Alien Icons/greymatter.png" id="3_0uypc"]
+[ext_resource type="Resource" uid="uid://c28ta4rmo6ubs" path="res://Skills/greymatter/data/calculated_evade.tres" id="4_w7o0x"]
+
+[resource]
+script = ExtResource("1_ss0at")
+alien_name = "Greymatter"
+texture = ExtResource("3_0uypc")
+attack_instance = ExtResource("1_fv5s2")
+primary_skill = ExtResource("2_rfwnx")
+secondary_skill = ExtResource("4_w7o0x")
+sprite_texture = ExtResource("2_1jjkb")
+metadata/_custom_type_script = "uid://dkiisy4yy88v5"

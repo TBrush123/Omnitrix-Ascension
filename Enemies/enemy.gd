@@ -2,6 +2,7 @@ class_name Enemy
 extends CharacterBody2D
 
 @export var health_component: HealthComponent
+@export var contact_damage: float = 5.0
 
 func _ready():
 	health_component.connect("health_changed", Callable(self, "_on_health_changed"))
@@ -28,3 +29,6 @@ func _physics_process(delta: float):
 		move_and_slide()
 
 	velocity = velocity.move_toward(Vector2.ZERO, 500 * delta)  # Dampen knockback over time
+
+func _on_contact_with_player(player: Node) -> void:
+	player.take_damage(contact_damage, global_position, self)

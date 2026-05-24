@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://cnhfsvl5vb48m"]
+
+[ext_resource type="Script" uid="uid://d2bgok4wtvtwe" path="res://Skills/greymatter/scenes/emp_burst_vfx.gd" id="1_c0rh0"]
+[ext_resource type="Texture2D" uid="uid://old2w4et0mif" path="res://Assets/Misc/Hourglass_fill.png" id="2_dod8p"]
+
+[node name="EMPBurstVFX" type="Node2D" unique_id=1128934752]
+script = ExtResource("1_c0rh0")
+
+[node name="Ring" type="Sprite2D" parent="." unique_id=1605806253]
+texture = ExtResource("2_dod8p")

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SkillData" format=3 uid="uid://c28ta4rmo6ubs"]
+
+[ext_resource type="Script" uid="uid://bnvnxj7bofaao" path="res://Skills/skill_data.gd" id="1_2t4xs"]
+[ext_resource type="PackedScene" uid="uid://p54fskchcl5g" path="res://Skills/greymatter/scenes/calculated_evade.tscn" id="2_3okba"]
+[ext_resource type="Script" uid="uid://cw4es8g4od7qi" path="res://Skills/skill_upgrade.gd" id="2_5gs3j"]
+
+[resource]
+script = ExtResource("1_2t4xs")
+name = "Calculated Evade"
+description = "Grey matter dashes forward, dodging enemy attacks. If done succesfully, this skill's cooldown gets reset."
+cooldown = 2.0
+skill_scene = ExtResource("2_3okba")
+metadata/_custom_type_script = "uid://bnvnxj7bofaao"

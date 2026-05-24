@@ -68,3 +68,6 @@ func get_cooldown_percent(slot: int) -> float:
 		return 0.0
 	return clampf(_cooldowns[slot] / _skills[slot].cooldown, 0.0, 1.0)
 	
+func reset_cooldown(slot: int) -> void:
+	_cooldowns[slot] = 0.0
+	emit_signal("skill_used", slot, 0.0)

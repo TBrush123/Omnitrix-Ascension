@@ -7,7 +7,7 @@ const BASE_STATS: Dictionary = {
 	"attack_cooldown":  0.5,
 	"projectile_speed": 300.0,
 	"drain_rate": 10.0,
-	"charge_rate": 15.0,
+	"charge_recharge": 15.0,
 	"max_charge": 100.0,
 }
 

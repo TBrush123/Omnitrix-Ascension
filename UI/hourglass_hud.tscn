@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cnyjh8q0qmt44" path="res://Assets/Misc/Omnitrix_charge.png" id="1_ne75i"]
 [ext_resource type="Texture2D" uid="uid://old2w4et0mif" path="res://Assets/Misc/Hourglass_fill.png" id="2_bytes"]
 [ext_resource type="Texture2D" uid="uid://cknkrf4y8u31r" path="res://Assets/Misc/Hourglass_under.png" id="2_rnl6m"]
+[ext_resource type="AudioStream" uid="uid://daqwsl5tgqmdy" path="res://Assets/SFX/Omnitrix_recharged.wav" id="5_syhar"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1ui3w"]
 
@@ -31,3 +32,8 @@ fill_mode = 3
 texture_under = ExtResource("2_rnl6m")
 texture_over = ExtResource("1_ne75i")
 texture_progress = ExtResource("2_bytes")
+
+[node name="RechargeSound" type="AudioStreamPlayer" parent="." unique_id=1512647108]
+stream = ExtResource("5_syhar")
+
+[node name="BeepSound" type="AudioStreamPlayer" parent="." unique_id=13605634]

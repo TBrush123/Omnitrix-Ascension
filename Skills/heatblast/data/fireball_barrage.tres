@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SkillData" format=3 uid="uid://b6av04xhr5e3w"]
+
+[ext_resource type="Script" uid="uid://bnvnxj7bofaao" path="res://Skills/skill_data.gd" id="1_02svm"]
+[ext_resource type="PackedScene" uid="uid://srss0rigdux7" path="res://Skills/heatblast/scenes/fireball_barrage.tscn" id="2_38bka"]
+[ext_resource type="Script" uid="uid://cw4es8g4od7qi" path="res://Skills/skill_upgrade.gd" id="3_psw6j"]
+
+[resource]
+script = ExtResource("1_02svm")
+name = "Fireball Barrage"
+description = "Heatblast hurls 5 fireballs in a spread arc in front of him."
+cooldown = 2.5
+skill_scene = ExtResource("2_38bka")
+metadata/_custom_type_script = "uid://bnvnxj7bofaao"

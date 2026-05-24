@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SkillData" format=3 uid="uid://ddkqr6byw8foo"]
+
+[ext_resource type="Script" uid="uid://bnvnxj7bofaao" path="res://Skills/skill_data.gd" id="1_b7ard"]
+[ext_resource type="PackedScene" uid="uid://basjhpevsfedy" path="res://Skills/heatblast/scenes/solar_flare.tscn" id="2_b2ark"]
+[ext_resource type="Script" uid="uid://cw4es8g4od7qi" path="res://Skills/skill_upgrade.gd" id="2_miqyf"]
+
+[resource]
+script = ExtResource("1_b7ard")
+name = "Solar Flare"
+description = "Heatblast releases a blinding explosion around himself."
+cooldown = 7.0
+skill_scene = ExtResource("2_b2ark")
+metadata/_custom_type_script = "uid://bnvnxj7bofaao"

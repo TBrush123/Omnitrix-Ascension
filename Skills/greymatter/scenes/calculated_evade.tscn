@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://p54fskchcl5g"]
+
+[ext_resource type="Script" uid="uid://bk24xm4dh3gu6" path="res://Skills/greymatter/scenes/calculated_evade.gd" id="1_dw6sq"]
+
+[node name="CalculatedEvade" type="Node2D" unique_id=1445588350]
+script = ExtResource("1_dw6sq")

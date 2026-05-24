@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://c0m3fktsolvnx"]
+
+[ext_resource type="Script" uid="uid://c8ibkwthqcln3" path="res://Skills/greymatter/scenes/sabotage_hotwire.gd" id="1_pxa2a"]
+[ext_resource type="PackedScene" uid="uid://ciltrt5ytf5eu" path="res://Skills/greymatter/scenes/emp_grenade.tscn" id="2_2s0ud"]
+
+[node name="SabotageHotwire" type="Node2D" unique_id=1614067449]
+script = ExtResource("1_pxa2a")
+emp = ExtResource("2_2s0ud")

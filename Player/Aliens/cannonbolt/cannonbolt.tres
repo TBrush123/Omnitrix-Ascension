@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="AlienData" format=3 uid="uid://cjg2ob4h7h3uk"]
+
+[ext_resource type="Script" uid="uid://dkiisy4yy88v5" path="res://Player/Aliens/alien_data.gd" id="1_j0su1"]
+[ext_resource type="Texture2D" uid="uid://c0fl1uh8jaw2b" path="res://Assets/Alien Icons/cannonbolt.png" id="2_onu0e"]
+
+[resource]
+script = ExtResource("1_j0su1")
+alien_name = "Cannonbolt"
+texture = ExtResource("2_onu0e")
+metadata/_custom_type_script = "uid://dkiisy4yy88v5"

@@ -12,6 +12,7 @@ extends Control
 @export var scale_active: float = 0.18
 @export var scale_inactive: float = 0.15
 @export var alien_icons: Node2D
+@export var error_icon: Texture2D
 
 var is_active: bool = false
 
@@ -43,7 +44,10 @@ func connect_to(player_omnitrix_component: OmnitrixComponent):
 
 
 func find_alien_at_index(index: int) -> Texture2D:
-	return aliens[((index % aliens.size()) + aliens.size()) % aliens.size()].texture
+	var texture = aliens[((index % aliens.size()) + aliens.size()) % aliens.size()].texture 
+	if texture:
+		return texture
+	return error_icon 
 
 func _setup_wheel():
 	for i in range(VISIBLE_SLOTS):

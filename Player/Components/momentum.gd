@@ -22,6 +22,8 @@ var was_max: bool = false
 
 
 func _process(delta: float) -> void:
+	if _player == null:
+		return
 	_moving = _player.velocity.length() > 10.0
 	if _moving:
 		_drain_timer = 0.0

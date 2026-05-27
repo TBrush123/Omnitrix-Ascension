@@ -10,7 +10,7 @@ const SPIN_RADIUS:    float = 70.0
 const SPIN_DURATION:  float = 1.5
 const TICK_INTERVAL:  float = 0.15
 const PULL_FORCE:     float = 180.0
-const TRAVEL_SPEED:   float = 120.0   # how fast the vortex moves at max momentum
+const TRAVEL_SPEED:   float = 120.0
 
 var _elapsed:       float = 0.0
 var _tick_timer:    float = 0.0
@@ -23,9 +23,8 @@ func _ready() -> void:
 	var collision = get_node_or_null("CollisionShape2D")
 	if collision and collision.shape is CircleShape2D:
 		collision.shape.radius = SPIN_RADIUS
-	($CollisionShape2D.shape as CircleShape2D).radius = SPIN_RADIUS
 
-	_traveling     = momentum_stacks >= MomentumComponent.MAX_STACKS
+	_traveling = momentum_stacks >= MomentumComponent.MAX_STACKS
 	_travel_target = get_global_mouse_position()
 
 	_animate_vortex()

@@ -35,6 +35,7 @@ var target_angle: float = 0.0
 var current_angle: float = 0.0
 var _hold_timer:    float = 0.0
 var _has_repeated:  bool  = false
+var _prev_dir:      int   = 0
 
 func _ready():
 	if aliens.is_empty():
@@ -78,6 +79,11 @@ func _process(delta):
 		dir = 0
 
 	if dir != 0 and is_active:
+		# Reset hold state if direction changed
+		if dir != _prev_dir:
+			_hold_timer = 0.0
+			_has_repeated = false
+
 		_hold_timer += delta
 
 		# First press — fire immediately
@@ -89,10 +95,13 @@ func _process(delta):
 			_has_repeated = true
 			_do_switch()
 
+		_prev_dir = dir
+
 	else:
 		# Key released — reset everything
 		_hold_timer   = 0.0
 		_has_repeated = false
+		_prev_dir = 0
 
 	if switch_timer > 0.0:
 		switch_timer -= delta

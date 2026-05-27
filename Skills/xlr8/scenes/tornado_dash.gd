@@ -7,10 +7,10 @@ var damage:           float   = 1.0
 var momentum_stacks:  int     = 0
 
 const DASH_DAMAGE_RADIUS: float = 28.0
-const LAP_DURATION:       float = 0.3
+const LAP_DURATION:       float = 0.6
 const DASH_DURATION:       float = 0.2
 const DASH_DISTANCE:       float = 200.0
-
+const MAX_MOMENTUM_STACKS: int = 4
 
 func _ready() -> void:
 	var player = get_parent().get_parent() as Player
@@ -19,7 +19,7 @@ func _ready() -> void:
 		queue_free()
 		return
 
-	if momentum_stacks >= MomentumComponent.MAX_STACKS:
+	if momentum_stacks >= MAX_MOMENTUM_STACKS:
 		print("Performing room lap!")
 		print("Current stacks: %d" % momentum_stacks)
 		_perform_room_lap(player)
@@ -66,7 +66,7 @@ func _perform_room_lap(player: Node) -> void:
 	var tween = create_tween()
 	for pt in points:
 		tween.tween_property(player, "global_position",
-			pt, LAP_DURATION / 8.0) \
+			pt, LAP_DURATION / 16.0) \
 			.set_trans(Tween.TRANS_LINEAR)
 		# Hit enemies near each waypoint
 		tween.tween_callback(func():
@@ -104,7 +104,7 @@ func _hit_enemies_at_position(pos: Vector2) -> void:
 			if enemy.has_node("HealthComponent"):
 				enemy.get_node("HealthComponent").take_damage(damage)
 			if enemy.has_method("apply_knockback"):
-				var dir = (enemy.global_position - get_parent().global_position).normalized()
+				var dir = (enemy.global_position - pos).normalized()
 				enemy.apply_knockback(dir * 200.0)
 
 func _spawn_dash_trail(player: Node) -> void:

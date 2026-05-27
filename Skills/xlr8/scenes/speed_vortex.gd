@@ -15,16 +15,20 @@ const TRAVEL_SPEED:   float = 120.0   # how fast the vortex moves at max momentu
 var _elapsed:       float = 0.0
 var _tick_timer:    float = 0.0
 var _hit_this_tick: Array = []
+var orbit_tweens:   Array = []
 var _traveling:     bool  = false
 var _travel_target: Vector2
 
-
 func _ready() -> void:
+	var collision = get_node_or_null("CollisionShape2D")
+	if collision and collision.shape is CircleShape2D:
+		collision.shape.radius = SPIN_RADIUS
 	($CollisionShape2D.shape as CircleShape2D).radius = SPIN_RADIUS
 
 	_traveling     = momentum_stacks >= MomentumComponent.MAX_STACKS
 	_travel_target = get_global_mouse_position()
 
+	_animate_vortex()
 	get_tree().create_timer(SPIN_DURATION).timeout.connect(queue_free)
 
 
@@ -38,7 +42,7 @@ func _process(delta: float) -> void:
 		global_position += move_dir * TRAVEL_SPEED * delta
 
 	# Pull enemies inward each frame
-	_pull_nearby_enemies()
+	_pull_nearby_enemies(delta)
 
 	# Damage tick
 	if _tick_timer >= TICK_INTERVAL:
@@ -47,7 +51,7 @@ func _process(delta: float) -> void:
 		_damage_nearby_enemies()
 
 
-func _pull_nearby_enemies() -> void:
+func _pull_nearby_enemies(delta: float) -> void:
 	var enemies = get_tree().get_nodes_in_group("enemy")
 	for enemy in enemies:
 		if not is_instance_valid(enemy):
@@ -56,7 +60,7 @@ func _pull_nearby_enemies() -> void:
 		if diff.length() > SPIN_RADIUS * 1.4:
 			continue
 		if enemy.has_method("apply_knockback"):
-			enemy.apply_knockback(diff.normalized() * PULL_FORCE * 0.016)
+			enemy.apply_knockback(diff.normalized() * PULL_FORCE * delta)
 
 
 func _damage_nearby_enemies() -> void:
@@ -76,6 +80,7 @@ func _animate_vortex() -> void:
 	for i in range(5):
 		var ghost_angle = (TAU / 5.0) * i
 		var orbit       = create_tween().set_loops(999)
+		orbit_tweens.append(orbit)
 		orbit.tween_method(
 			func(angle: float):
 				if not is_instance_valid(self): return
@@ -87,3 +92,9 @@ func _animate_vortex() -> void:
 			ghost_angle + TAU,
 			SPIN_DURATION * 0.5
 		)
+
+func _exit_tree() -> void:
+	for tween in orbit_tweens:
+		if is_instance_valid(tween):
+			tween.kill()
+	orbit_tweens.clear()

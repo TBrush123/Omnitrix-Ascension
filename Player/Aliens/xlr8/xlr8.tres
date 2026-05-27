@@ -5,6 +5,7 @@
 [ext_resource type="Resource" uid="uid://cwv3tn4ubo7ul" path="res://Skills/xlr8/data/tornado_dash.tres" id="2_p3rqm"]
 [ext_resource type="Texture2D" uid="uid://b5g3328yqnoqd" path="res://Assets/Alien Icons/xlr8.png" id="3_p3rqm"]
 [ext_resource type="Resource" uid="uid://c5klkfo54wje1" path="res://Skills/xlr8/data/speed_vortex.tres" id="4_p3rqm"]
+[ext_resource type="Texture2D" uid="uid://dyyejdhdwlp66" path="res://Assets/Alien Sprites/xlr8.png" id="5_o7mig"]
 
 [resource]
 script = ExtResource("2_jvjyx")
@@ -14,6 +15,7 @@ attack_instance = ExtResource("1_5ugsg")
 primary_skill = ExtResource("2_p3rqm")
 secondary_skill = ExtResource("4_p3rqm")
 passive_trait = "speed_trail"
+sprite_texture = ExtResource("5_o7mig")
 stat_modifiers = {
 "move_speed": 150.0
 }

@@ -20,7 +20,7 @@
 [ext_resource type="Script" uid="uid://bjyuue8v1oqsm" path="res://Skills/skill_executor.gd" id="15_dkpta"]
 [ext_resource type="Script" path="res://Player/Components/alien_charge_component.gd" id="16_lfmf2"]
 [ext_resource type="Resource" uid="uid://cjg2ob4h7h3uk" path="res://Player/Aliens/cannonbolt/cannonbolt.tres" id="17_n471f"]
-[ext_resource type="Script" uid="uid://r4mtcyerb8ff" path="res://Skills/xlr8/momentum.gd" id="21_7emwf"]
+[ext_resource type="Script" uid="uid://r4mtcyerb8ff" path="res://Player/Components/momentum.gd" id="21_7emwf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gs3sa"]
 size = Vector2(127, 123)

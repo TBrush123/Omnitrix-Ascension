@@ -4,16 +4,20 @@ extends Node2D
 
 var direction:        Vector2 = Vector2.RIGHT
 var damage:           float   = 1.0
-var momentum_stacks:  int     = 0    # set by player
+var momentum_stacks:  int     = 0
 
 const DASH_DAMAGE_RADIUS: float = 28.0
-const LAP_DURATION:       float = 0.6
+const LAP_DURATION:       float = 0.3
 const DASH_DURATION:       float = 0.2
 const DASH_DISTANCE:       float = 200.0
 
 
 func _ready() -> void:
 	var player = get_parent().get_parent() as Player
+	if not player:
+		push_error("TornadoDash: Could not find Player in parent hierarchy")
+		queue_free()
+		return
 
 	if momentum_stacks >= MomentumComponent.MAX_STACKS:
 		print("Performing room lap!")
@@ -27,7 +31,9 @@ func _ready() -> void:
 
 # ── Low momentum: straight dash ──
 func _perform_dash(player: Node) -> void:
-	player.get_node("Components/InvincibilityComponent").activate(DASH_DURATION)
+	var invincibility = player.get_node_or_null("Components/InvincibilityComponent")
+	if invincibility:
+		invincibility.activate(DASH_DURATION)
 
 	var target = player.global_position + direction * DASH_DISTANCE
 	var tween  = create_tween()
@@ -43,7 +49,9 @@ func _perform_dash(player: Node) -> void:
 
 # ── Max momentum: full room lap ──
 func _perform_room_lap(player: Node) -> void:
-	player.get_node("Components/InvincibilityComponent").activate(LAP_DURATION)
+	var invincibility = player.get_node_or_null("Components/InvincibilityComponent")
+	if invincibility:
+		invincibility.activate(LAP_DURATION)
 
 	# Build a circular path around the room center
 	# We approximate this with 8 points around the player
@@ -51,8 +59,8 @@ func _perform_room_lap(player: Node) -> void:
 	var lap_radius = 160.0
 	var points: Array[Vector2] = []
 
-	for i in range(9):   # 8 steps + return to start
-		var angle = (TAU / 8.0) * i
+	for i in range(16):   # 16 steps + return to start
+		var angle = (TAU / 16.0) * i
 		points.append(center + Vector2(cos(angle), sin(angle)) * lap_radius)
 
 	var tween = create_tween()
@@ -80,8 +88,10 @@ func _hit_enemies_along_path(from: Vector2, to: Vector2) -> void:
 		var closest = Geometry2D.get_closest_point_to_segment(
 			enemy.global_position, from, to
 		)
+		
 		if enemy.global_position.distance_to(closest) < DASH_DAMAGE_RADIUS:
-			_damage_enemy(enemy)
+			#_damage_enemy(enemy)
+			pass
 
 
 func _hit_enemies_at_position(pos: Vector2) -> void:
@@ -90,16 +100,12 @@ func _hit_enemies_at_position(pos: Vector2) -> void:
 		if not is_instance_valid(enemy):
 			continue
 		if pos.distance_to(enemy.global_position) < DASH_DAMAGE_RADIUS:
-			_damage_enemy(enemy)
-
-
-func _damage_enemy(enemy: Node) -> void:
-	if enemy.has_node("HealthComponent"):
-		enemy.get_node("HealthComponent").take_damage(damage)
-	if enemy.has_method("apply_knockback"):
-		var dir = (enemy.global_position - get_parent().global_position).normalized()
-		enemy.apply_knockback(dir * 200.0)
-
+			#_damage_enemy(enemy)
+			if enemy.has_node("HealthComponent"):
+				enemy.get_node("HealthComponent").take_damage(damage)
+			if enemy.has_method("apply_knockback"):
+				var dir = (enemy.global_position - get_parent().global_position).normalized()
+				enemy.apply_knockback(dir * 200.0)
 
 func _spawn_dash_trail(player: Node) -> void:
 	for i in range(3):
@@ -107,13 +113,17 @@ func _spawn_dash_trail(player: Node) -> void:
 			func(): _spawn_single_ghost(player)
 		)
 
-
 func _spawn_single_ghost(player: Node) -> void:
 	if not is_instance_valid(player):
 		return
+	var sprite = player.get_node_or_null("Sprite2D")
+	if not sprite:
+		return
+
 	var ghost             = Sprite2D.new()
-	ghost.texture         = player.get_node("Sprite2D").texture
-	ghost.scale           = player.get_node("Sprite2D").scale
+	ghost.texture         = sprite.texture
+	ghost.scale           = sprite.scale
+	ghost.flip_h          = sprite.flip_h
 	ghost.modulate        = Color(0.3, 0.8, 1.0, 0.6)
 	ghost.global_position = player.global_position
 	get_tree().current_scene.add_child(ghost)

@@ -13,6 +13,7 @@ extends CharacterBody2D
 @onready var skill_executor: 	  SkillExecutor = $Components/SkillExecutor
 @onready var alien_charge:        AlienChargeComponent = $Components/AlienChargeComponent
 @onready var momentum: 		MomentumComponent = $Components/MomentumComponent
+
 # ─────────────────────────────────────────
 # External references
 @export var omnitrix_wheel: OmnitrixWheel
@@ -34,6 +35,8 @@ func _ready() -> void:
 	alien_charge.charge_depleted.connect(_on_charge_depleted)
 	alien_charge.charge_recharged.connect(_on_charge_recharged)
 	charge_hud.connect_to(alien_charge)
+	momentum.reached_max_stacks.connect(_on_max_momentum)
+	momentum.left_max_stacks.connect(_on_lost_max_momentum)
 
 
 func _process(delta: float) -> void:
@@ -270,6 +273,14 @@ func _on_charge_depleted() -> void:
 	_play_detransform_effect()
 
 func _on_charge_recharged() -> void:
+	pass
+	#TODO
+
+func _on_max_momentum() -> void:
+	pass
+	#TODO
+
+func _on_lost_max_momentum() -> void:
 	pass
 	#TODO
 

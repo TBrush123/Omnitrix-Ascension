@@ -13,20 +13,28 @@ extends Control
 @export var scale_inactive: float = 0.15
 @export var alien_icons: Node2D
 @export var error_icon: Texture2D
+@export var switch_cooldown: float = 0.25
 
+
+var switch_timer: float = 0.0
 var is_active: bool = false
+var dir: int = 0
 
 var aliens: Array[AlienData]
 var omnitrix_component: OmnitrixComponent
 
 const VISIBLE_SLOTS: int = 7
-const HALF: int = VISIBLE_SLOTS / 2 # 3
+const HALF: int = VISIBLE_SLOTS / 2 
 const STEP: float = (2 * PI) / 10.0 # 36 degrees
+const INITIAL_DELAY:  float = 0.4 
+const REPEAT_INTERVAL: float = 0.25
 
 var icons = []
 var selected_index: int = 0
 var target_angle: float = 0.0
 var current_angle: float = 0.0
+var _hold_timer:    float = 0.0
+var _has_repeated:  bool  = false
 
 func _ready():
 	if aliens.is_empty():
@@ -57,30 +65,54 @@ func _setup_wheel():
 		alien_icons.add_child(icon)
 		icons.append(icon)
 
-func _input(event):
-	var dir = 0
-	if event.is_action_pressed("ui_right"): dir = 1
-	if event.is_action_pressed("ui_left"): dir = -1
-	if dir != 0 and is_active:
-		switchingSFX.pitch_scale = randf_range(0.9, 1.1)
-		switchingSFX.play()
-		# 1. Update the logical selection (using posmod logic for safety)
-		selected_index = ((selected_index + dir) % aliens.size() + aliens.size()) % aliens.size()
-		# 2. Shift the icons array and update ONLY the texture that wrapped around
-		if dir == 1:
-			var icon = icons.pop_front()
-			icon.texture = find_alien_at_index(selected_index + HALF)
-			icons.append(icon)
-		else:
-			var icon = icons.pop_back()
-			icon.texture = find_alien_at_index(selected_index - HALF)
-			icons.push_front(icon)
-		current_angle += dir * STEP
-		
 
 func _process(delta):
 	current_angle = lerp_angle(current_angle, target_angle, delta * rotation_speed)
 	_draw_wheel()
+
+	if Input.is_action_pressed("ui_right"):
+		dir = 1
+	elif Input.is_action_pressed("ui_left"):
+		dir = -1
+	else:
+		dir = 0
+
+	if dir != 0 and is_active:
+		_hold_timer += delta
+
+		# First press — fire immediately
+		if switch_timer <= 0.0 and _hold_timer <= delta + 0.01:
+			_do_switch()
+
+		# After initial delay — fire on repeat interval
+		elif _hold_timer >= INITIAL_DELAY and switch_timer <= 0.0:
+			_has_repeated = true
+			_do_switch()
+
+	else:
+		# Key released — reset everything
+		_hold_timer   = 0.0
+		_has_repeated = false
+
+	if switch_timer > 0.0:
+		switch_timer -= delta
+
+func _do_switch() -> void:
+	switchingSFX.pitch_scale = randf_range(0.9, 1.1)
+	switchingSFX.play()
+	selected_index = ((selected_index + dir) % aliens.size() + aliens.size()) % aliens.size()
+	if dir == 1:
+		var icon = icons.pop_front()
+		icon.texture = find_alien_at_index(selected_index + HALF)
+		icons.append(icon)
+	else:
+		var icon = icons.pop_back()
+		icon.texture = find_alien_at_index(selected_index - HALF)
+		icons.push_front(icon)
+	current_angle += dir * STEP
+
+	# Use faster cooldown once repeat has kicked in
+	switch_timer = REPEAT_INTERVAL if _has_repeated else switch_cooldown
 
 func _draw_wheel():
 	for i in range(VISIBLE_SLOTS):

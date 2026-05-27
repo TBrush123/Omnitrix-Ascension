@@ -1,8 +1,9 @@
-# momentum_component.gd
 class_name MomentumComponent
 extends Node2D
 
 signal stacks_changed(current: int, maximum: int)
+signal reached_max_stacks
+signal left_max_stacks
 
 const MAX_STACKS:      int   = 8
 const BUILD_TIME:      float = 0.3    # seconds of movement to gain one stack
@@ -14,6 +15,7 @@ var current_stacks: int   = 0
 var _build_timer:   float = 0.0
 var _drain_timer:   float = 0.0
 var _moving:        bool  = false
+var was_max: bool = false
 
 @onready var _stats: PlayerStats = get_parent().get_node("PlayerStats")
 @onready var _player = get_parent().get_parent() as Player
@@ -42,6 +44,9 @@ func _add_stack() -> void:
 	_apply_to_stats()
 	emit_signal("stacks_changed", current_stacks, MAX_STACKS)
 
+	if current_stacks == MAX_STACKS and not was_max:
+		emit_signal("reached_max_stacks")
+
 
 func _remove_stack() -> void:
 	if current_stacks <= 0:
@@ -50,11 +55,17 @@ func _remove_stack() -> void:
 	_apply_to_stats()
 	emit_signal("stacks_changed", current_stacks, MAX_STACKS)
 
+	if was_max and current_stacks < MAX_STACKS:
+		emit_signal("left_max_stacks")
+
 
 func clear_stacks() -> void:
 	current_stacks = 0
 	_apply_to_stats()
 	emit_signal("stacks_changed", 0, MAX_STACKS)
+
+	if was_max:
+		emit_signal("left_max_stacks")
 
 
 func _apply_to_stats() -> void:

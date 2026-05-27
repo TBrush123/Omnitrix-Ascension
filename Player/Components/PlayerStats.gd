@@ -14,16 +14,12 @@ const BASE_STATS: Dictionary = {
 var active_alien: AlienData = null
 var collected_modifiers: Array[StatModifier] = []
 
-func _process(_delta: float) -> void:
-	print(get_stat("move_speed"))
 
 func get_stat(stat_name: String) -> float:
 	var base: float = BASE_STATS.get(stat_name, 0.0)
 	var flat_bonus: float = 0.0
 	var percent_bonus: float = 0.0
 
-	if active_alien:
-		print("Active alien: %s" % active_alien.alien_name)
 	if active_alien and active_alien.stat_modifiers.has(stat_name):
 		base += active_alien.stat_modifiers[stat_name]
 	

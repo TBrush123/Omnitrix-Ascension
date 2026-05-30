@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="AlienData" format=3 uid="uid://cxy1wckw2rrlg"]
 
 [ext_resource type="PackedScene" uid="uid://st3ughxgn8op" path="res://Player/Aliens/greymatter/greymatter_melee.tscn" id="1_fv5s2"]
-[ext_resource type="Script" uid="uid://dkiisy4yy88v5" path="res://Player/Aliens/alien_data.gd" id="1_ss0at"]
+[ext_resource type="Script" uid="uid://dkiisy4yy88v5" path="res://Resources/alien_data.gd" id="1_ss0at"]
 [ext_resource type="Texture2D" uid="uid://dkavp4ntv41s2" path="res://Assets/Alien Sprites/greymatter.png" id="2_1jjkb"]
 [ext_resource type="Resource" uid="uid://dakehpdknmnug" path="res://Skills/greymatter/data/sabotage_hotwire.tres" id="2_rfwnx"]
 [ext_resource type="Texture2D" uid="uid://lilk0tb3i3pd" path="res://Assets/Alien Icons/greymatter.png" id="3_0uypc"]

@@ -179,7 +179,6 @@ func _dodge_success_effect() -> void:
 	tween.tween_property($Sprite2D, "modulate",
 		Color.WHITE, 0.12)
 
-	# Floating text "DODGE!" above player
 	_spawn_floating_text("DODGE!")
 
 

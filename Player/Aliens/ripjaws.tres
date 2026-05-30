@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="AlienData" format=3 uid="uid://4i1cm6rpykbb"]
 
-[ext_resource type="Script" uid="uid://dkiisy4yy88v5" path="res://Player/Aliens/alien_data.gd" id="1_x2psg"]
+[ext_resource type="Script" uid="uid://dkiisy4yy88v5" path="res://Resources/alien_data.gd" id="1_x2psg"]
 [ext_resource type="Texture2D" uid="uid://cflh6n8hk4pgg" path="res://Assets/Alien Icons/ripjaws.png" id="2_wxgho"]
 
 [resource]

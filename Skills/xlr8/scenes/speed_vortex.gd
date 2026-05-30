@@ -59,7 +59,7 @@ func _pull_nearby_enemies(delta: float) -> void:
 		if diff.length() > SPIN_RADIUS * 1.4:
 			continue
 		if enemy.has_method("apply_knockback"):
-			enemy.apply_knockback(diff.normalized() * PULL_FORCE * delta)
+			enemy.apply_knockback(diff.normalized(), PULL_FORCE * delta)
 
 
 func _damage_nearby_enemies() -> void:

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="AlienData" format=3 uid="uid://dpdpnaqsht8ql"]
 
-[ext_resource type="Script" uid="uid://dkiisy4yy88v5" path="res://Player/Aliens/alien_data.gd" id="1_1fdt5"]
+[ext_resource type="Script" uid="uid://dkiisy4yy88v5" path="res://Resources/alien_data.gd" id="1_1fdt5"]
 [ext_resource type="PackedScene" uid="uid://b77cr7x5ay0bo" path="res://Player/Aliens/heatblast/heatblast_melee.tscn" id="1_h2wa1"]
 [ext_resource type="Resource" uid="uid://b6av04xhr5e3w" path="res://Skills/heatblast/data/fireball_barrage.tres" id="2_kfj6j"]
 [ext_resource type="Texture2D" uid="uid://b2ylalh64xavs" path="res://Assets/Alien Icons/heatblast.png" id="2_msmll"]

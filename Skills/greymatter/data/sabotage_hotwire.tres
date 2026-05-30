@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="SkillData" format=3 uid="uid://dakehpdknmnug"]
 
-[ext_resource type="Script" uid="uid://bnvnxj7bofaao" path="res://Skills/skill_data.gd" id="1_gc2ir"]
+[ext_resource type="Script" uid="uid://bnvnxj7bofaao" path="res://Resources/skill_data.gd" id="1_gc2ir"]
 [ext_resource type="Script" uid="uid://cw4es8g4od7qi" path="res://Skills/skill_upgrade.gd" id="2_0uwdp"]
 [ext_resource type="PackedScene" uid="uid://c0m3fktsolvnx" path="res://Skills/greymatter/scenes/sabotage_hotwire.tscn" id="2_o0pqi"]
 

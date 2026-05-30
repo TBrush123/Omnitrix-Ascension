@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="SkillData" format=3 uid="uid://cwv3tn4ubo7ul"]
 
-[ext_resource type="Script" uid="uid://bnvnxj7bofaao" path="res://Skills/skill_data.gd" id="1_qe84t"]
+[ext_resource type="Script" uid="uid://bnvnxj7bofaao" path="res://Resources/skill_data.gd" id="1_qe84t"]
 [ext_resource type="PackedScene" uid="uid://bij7ruqmcmyyh" path="res://Skills/xlr8/scenes/tornado_dash.tscn" id="2_1dsco"]
 [ext_resource type="Script" uid="uid://cw4es8g4od7qi" path="res://Skills/skill_upgrade.gd" id="2_vndxj"]
 

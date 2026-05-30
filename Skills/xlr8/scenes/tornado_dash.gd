@@ -105,7 +105,7 @@ func _hit_enemies_at_position(pos: Vector2) -> void:
 				enemy.get_node("HealthComponent").take_damage(damage)
 			if enemy.has_method("apply_knockback"):
 				var dir = (enemy.global_position - pos).normalized()
-				enemy.apply_knockback(dir * 200.0)
+				enemy.apply_knockback(dir, 200.0)
 
 func _spawn_dash_trail(player: Node) -> void:
 	for i in range(3):

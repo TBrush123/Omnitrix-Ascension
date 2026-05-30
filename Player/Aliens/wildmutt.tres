@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="AlienData" format=3 uid="uid://bi8qgof8qbojl"]
 
-[ext_resource type="Script" uid="uid://dkiisy4yy88v5" path="res://Player/Aliens/alien_data.gd" id="1_xloib"]
+[ext_resource type="Script" uid="uid://dkiisy4yy88v5" path="res://Resources/alien_data.gd" id="1_xloib"]
 [ext_resource type="Texture2D" uid="uid://g3x8n6yiqj5n" path="res://Assets/Alien Icons/wildmutt.png" id="2_7c6pf"]
 
 [resource]

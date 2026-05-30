@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="AlienData" format=3 uid="uid://bjxamx3t3ua3w"]
 
-[ext_resource type="Script" uid="uid://dkiisy4yy88v5" path="res://Player/Aliens/alien_data.gd" id="1_xml5a"]
+[ext_resource type="Script" uid="uid://dkiisy4yy88v5" path="res://Resources/alien_data.gd" id="1_xml5a"]
 [ext_resource type="Texture2D" uid="uid://b1x7bbc25hynm" path="res://Assets/Alien Icons/diamondhead.png" id="2_kp8ws"]
 
 [resource]

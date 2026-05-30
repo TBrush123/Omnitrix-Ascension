@@ -1,4 +1,3 @@
-# alien_charge_component.gd
 class_name AlienChargeComponent
 extends Node2D
 
@@ -9,7 +8,7 @@ signal charge_recharged    # back to full, can transform again
 @export var max_charge:      float = 10.0   # seconds of alien time
 @export var drain_rate:      float = 1.0    # per second while transformed
 @export var recharge_rate:   float = 2.0    # per second while human
-@export var recharge_delay:  float = 1.5    # seconds before recharge starts
+@export var recharge_delay:  float = 1.5
 
 var current_charge: float  = 100.0
 var is_transformed: bool   = false

@@ -98,7 +98,6 @@ func _process(delta):
 		_prev_dir = dir
 
 	else:
-		# Key released — reset everything
 		_hold_timer   = 0.0
 		_has_repeated = false
 		_prev_dir = 0
@@ -137,6 +136,9 @@ func _draw_wheel():
 
 func get_active_alien_index():
 	return selected_index
+
+func can_transform() -> bool:
+	return omnitrix_component.can_transform()
 
 func toggle_wheel(should_show: bool):
 	is_active = should_show

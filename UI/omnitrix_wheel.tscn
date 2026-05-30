@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://ch7q3mdua6tqd" path="res://Assets/omnitrix_wheel_top.png" id="2_mepqo"]
 [ext_resource type="Texture2D" uid="uid://c84jms6s6y3ny" path="res://Assets/Alien Icons/error.png" id="2_qevwu"]
 [ext_resource type="Texture2D" uid="uid://dbp8pnkcs08vw" path="res://Assets/omnitrix_wheel_bottom.png" id="3_dgv0a"]
+[ext_resource type="Texture2D" uid="uid://bvsl5c8fkqh86" path="res://Assets/Misc/omnitrix.png" id="3_pktxn"]
 [ext_resource type="Texture2D" uid="uid://c4jvpesw5afym" path="res://Assets/omnitrix_wheel_selector.png" id="4_351yj"]
 [ext_resource type="Shader" uid="uid://d0vpjqt5wsgr1" path="res://UI/invert.gdshader" id="5_3u6hv"]
 [ext_resource type="Texture2D" uid="uid://bd3ehyj2s3nrx" path="res://Assets/omnitrix_wheel.png" id="7_52wv3"]
@@ -29,6 +30,15 @@ activatingSFX = NodePath("ActivationSFX")
 transformSFX = NodePath("AudioStreamPlayer")
 alien_icons = NodePath("AlienIcons")
 error_icon = ExtResource("2_qevwu")
+
+[node name="TextureRect5" type="TextureRect" parent="." unique_id=1050118763]
+layout_mode = 0
+offset_left = -147.0
+offset_top = -295.00003
+offset_right = 244.0
+offset_bottom = 504.99997
+scale = Vector2(0.7496472, 0.7496472)
+texture = ExtResource("3_pktxn")
 
 [node name="TextureRect2" type="TextureRect" parent="." unique_id=1532187377]
 layout_mode = 1

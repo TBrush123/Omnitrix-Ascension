@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://ck4cpi2s0im5w" path="res://Player/Components/HealthComponent.gd" id="3_k53q1"]
 [ext_resource type="Script" uid="uid://ct3lnikh55pjt" path="res://Player/Components/OmnitrixComponent.gd" id="4_fhl08"]
 [ext_resource type="Script" path="res://Player/Components/invincibility_component.gd" id="4_o28un"]
-[ext_resource type="Script" uid="uid://dkiisy4yy88v5" path="res://Player/Aliens/alien_data.gd" id="5_k53q1"]
+[ext_resource type="Script" uid="uid://dkiisy4yy88v5" path="res://Resources/alien_data.gd" id="5_k53q1"]
 [ext_resource type="Resource" uid="uid://bq661c5vffh3b" path="res://Player/Aliens/xlr8/xlr8.tres" id="6_fhl08"]
 [ext_resource type="Resource" uid="uid://dpdpnaqsht8ql" path="res://Player/Aliens/heatblast/heatblast.tres" id="7_od3ui"]
 [ext_resource type="Script" uid="uid://ogoiyocu8xvv" path="res://Player/Components/PlayerStats.gd" id="7_vtle1"]
@@ -18,7 +18,7 @@
 [ext_resource type="Resource" uid="uid://4i1cm6rpykbb" path="res://Player/Aliens/ripjaws.tres" id="14_pisgm"]
 [ext_resource type="Resource" uid="uid://cxy1wckw2rrlg" path="res://Player/Aliens/greymatter/greymatter.tres" id="15_b1ygp"]
 [ext_resource type="Script" uid="uid://bjyuue8v1oqsm" path="res://Skills/skill_executor.gd" id="15_dkpta"]
-[ext_resource type="Script" path="res://Player/Components/alien_charge_component.gd" id="16_lfmf2"]
+[ext_resource type="Script" uid="uid://b21dmnkdrqb7b" path="res://Player/Components/alien_charge_component.gd" id="16_lfmf2"]
 [ext_resource type="Resource" uid="uid://cjg2ob4h7h3uk" path="res://Player/Aliens/cannonbolt/cannonbolt.tres" id="17_n471f"]
 [ext_resource type="Script" uid="uid://r4mtcyerb8ff" path="res://Player/Components/momentum.gd" id="21_7emwf"]
 

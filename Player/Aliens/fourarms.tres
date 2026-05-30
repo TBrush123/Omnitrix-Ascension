@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="AlienData" format=3 uid="uid://bsnpv5yepfdy2"]
 
-[ext_resource type="Script" uid="uid://dkiisy4yy88v5" path="res://Player/Aliens/alien_data.gd" id="1_nhht1"]
+[ext_resource type="Script" uid="uid://dkiisy4yy88v5" path="res://Resources/alien_data.gd" id="1_nhht1"]
 [ext_resource type="Texture2D" uid="uid://dy25h1xfubc4w" path="res://Assets/Alien Icons/fourarms.png" id="2_ba7k0"]
 
 [resource]

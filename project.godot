@@ -22,11 +22,12 @@ window/size/viewport_height=1080
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot-vim/plugin.cfg")
+enabled=PackedStringArray()
 
 [file_customization]
 
 folder_colors={
+"res://Autoloads/": "purple",
 "res://Player/Aliens/": "green",
 "res://Skills/": "red"
 }

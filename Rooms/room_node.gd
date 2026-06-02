@@ -8,12 +8,16 @@ enum Door {
     WEST
 }
 
+class Connection:
+    var to_room_id: int
+    var door: Door
+
 var id: int
 var position: Vector2
 var size: Vector2
 var data: RoomData = null
 
-var connections: Array[int]
+var connections: Array[Connection] = []
 var is_furthest: bool = false
 
 func get_door_position(door: Door) -> Vector2:

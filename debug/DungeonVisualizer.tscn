@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://br07g6ur2ecb"]
+
+[ext_resource type="Script" uid="uid://cxiuorsoht64h" path="res://debug/DungeonVisualizer.gd" id="1_na5hc"]
+
+[node name="Node2D" type="Node2D" unique_id=1094891923]
+script = ExtResource("1_na5hc")

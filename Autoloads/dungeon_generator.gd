@@ -2,13 +2,13 @@ class_name DungeonGenerator
 extends RefCounted
 
 const ROOM_SIZE: Vector2 = Vector2(320, 240) # Assuming all rooms are the same size for simplicity
-const PLACE_RADIUS: float = 400.0 # Minimum distance between room centers
-const PLACE_JITTER: float = 60.0 # Random offset applied to room positions
+const PLACE_RADIUS: float = 500.0 # Minimum distance between room centers
+const PLACE_JITTER: float = 80.0 # Random offset applied to room positions
 const BONUS_CONNECTION_CHANCE: float = 0.35 # Chance to add extra connections between rooms
 const BONUS_CONNECTION_RADIUS: float = 500.0 # Max distance for bonus connections
 const ROOM_COUNT_MIN: int = 7
 const ROOM_COUNT_MAX: int = 10
-const MAX_PLACE_ATTEMPTS: int = 20
+const MAX_PLACE_ATTEMPTS: int = 50
 
 var rooms: Array[RoomNode] = []
 var corridors: Array[CorridorData] = []
@@ -23,7 +23,7 @@ func generate() -> void:
 
 func _place_rooms() -> void:
 	var count = randi_range(ROOM_COUNT_MIN, ROOM_COUNT_MAX)
-	var queue: Array[RoomNode] = []
+	var queue: Array = []
 
 	var start = RoomNode.new()
 	start.id = 0
@@ -31,6 +31,8 @@ func _place_rooms() -> void:
 	start.size = ROOM_SIZE
 	rooms.append(start)
 	queue.push_back(0)
+
+	var chance = 1.0
 
 	while queue.size() > 0 and rooms.size() < count:
 		var parent_idx = queue.pop_front()
@@ -46,6 +48,10 @@ func _place_rooms() -> void:
 		room.size = ROOM_SIZE
 		rooms.append(room)
 		queue.push_back(room.id)
+
+		if randf() < chance:
+			queue.push_back(parent_idx)
+			chance *= 0.75
 
 		_add_connection(parent.id, room.id)
 
@@ -67,8 +73,24 @@ func _add_connection(from_id: int, to_id: int) -> void:
 		rooms[to_id].connections.append(from_id)
 
 func _assign_content() -> void:
-	for room in rooms:
-		room.data = RoomTypeRegistry.get_random(RoomData.RoomType.COMBAT)
+	for i in rooms.size():
+		var room = rooms[i]
+		
+		if i == 0:
+			room.data = RoomRegistry.get_random(RoomData.RoomType.REST)
+			continue
+		
+		if room.is_furthest:
+			room.data = RoomRegistry.get_random(RoomData.RoomType.EXIT)
+			continue
+		
+		var roll = randf()
+		if roll < 0.55:
+			room.data = RoomRegistry.get_random(RoomData.RoomType.COMBAT)
+		elif roll < 0.75:
+			room.data = RoomRegistry.get_random(RoomData.RoomType.TREASURE)
+		else:
+			room.data = RoomRegistry.get_random(RoomData.RoomType.ELITE)
 
 func _try_place_near(center: Vector2) -> Vector2:
 	for i in range(MAX_PLACE_ATTEMPTS):
@@ -84,7 +106,71 @@ func _try_place_near(center: Vector2) -> Vector2:
 
 func _is_position_valid(pos: Vector2) -> bool:
 	for room in rooms:
-		var min_dist = (ROOM_SIZE.x + ROOM_SIZE.y) / 2 + 20.0
-		if room.position.distance_to(pos) < min_dist:
+		var min_dist_x = ROOM_SIZE.x
+		var min_dist_y = ROOM_SIZE.y
+		var diff = (pos - room.position).abs()
+		if diff.x < min_dist_x and diff.y < min_dist_y:
 			return false
-	return true
+	return true	
+
+func _build_corridors() -> void:
+	var seen: Array[String] = []
+
+	for room in rooms:
+		for other_id in room.connections:
+
+			var key = "%d-%d" % [mini(room.id, other_id), maxi(room.id, other_id)]
+			if key in seen:
+				continue
+			seen.append(key)
+
+			var other = rooms[other_id]
+			var corridor = CorridorData.new()
+			corridor.from_room_id = room.id
+			corridor.to_room_id = other.id
+			corridor.points = _make_corridor_points(room, other)
+			corridors.append(corridor)
+
+func _make_corridor_points(a: RoomNode, b: RoomNode) -> Array[Vector2]:
+	var door_a = a.get_exit_door(b.position)
+	var door_b = b.get_exit_door(a.position)
+
+	var start = a.get_door_position(door_a)
+	var end_  = b.get_door_position(door_b)
+	
+	# Same side → U-shape
+	if door_a == door_b:
+		var offset = 60.0  # how far to loop out before turning
+		match door_a:
+			RoomNode.Door.EAST:
+				var out_x = max(start.x, end_.x) + offset
+				return [start, Vector2(out_x, start.y), Vector2(out_x, end_.y), end_]
+			RoomNode.Door.WEST:
+				var out_x = min(start.x, end_.x) - offset
+				return [start, Vector2(out_x, start.y), Vector2(out_x, end_.y), end_]
+			RoomNode.Door.SOUTH:
+				var out_y = max(start.y, end_.y) + offset
+				return [start, Vector2(start.x, out_y), Vector2(end_.x, out_y), end_]
+			RoomNode.Door.NORTH:
+				var out_y = min(start.y, end_.y) - offset
+				return [start, Vector2(start.x, out_y), Vector2(end_.x, out_y), end_]
+	
+	# Opposite sides → Z-shape
+	var opposite_pairs = [
+		[RoomNode.Door.EAST,  RoomNode.Door.WEST],
+		[RoomNode.Door.WEST,  RoomNode.Door.EAST],
+		[RoomNode.Door.NORTH, RoomNode.Door.SOUTH],
+		[RoomNode.Door.SOUTH, RoomNode.Door.NORTH],
+	]
+	
+	for pair in opposite_pairs:
+		if door_a == pair[0] and door_b == pair[1]:
+			if door_a == RoomNode.Door.EAST or door_a == RoomNode.Door.WEST:
+				var mid_x = (start.x + end_.x) / 2
+				return [start, Vector2(mid_x, start.y), Vector2(mid_x, end_.y), end_]
+			else:
+				var mid_y = (start.y + end_.y) / 2
+				return [start, Vector2(start.x, mid_y), Vector2(end_.x, mid_y), end_]
+	
+	# Adjacent sides → L-shape
+	return [start, Vector2(end_.x, start.y), end_]

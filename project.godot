@@ -15,6 +15,10 @@ run/main_scene="uid://b2rgcpt4c4s8g"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="uid://c6o0yvgtxa6k1"
 
+[autoload]
+
+RoomRegistry="*uid://ccwwbjdl4qxm6"
+
 [display]
 
 window/size/viewport_width=1920

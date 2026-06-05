@@ -9,6 +9,7 @@
 shader = ExtResource("2_ql3qm")
 shader_parameter/glow_color = Color(0.3, 1, 0.3, 1)
 shader_parameter/glow_size = 3.0
+shader_parameter/MAX_RADIUS = 1
 
 [sub_resource type="Gradient" id="Gradient_s7uw5"]
 colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
@@ -26,6 +27,12 @@ point_count = 4
 [sub_resource type="CurveTexture" id="CurveTexture_ub0gr"]
 curve = SubResource("Curve_ql3qm")
 
+[sub_resource type="Gradient" id="Gradient_ql3qm"]
+colors = PackedColorArray(1, 1, 1, 1, 0.5689727, 0.5689728, 0.5689725, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ub0gr"]
+gradient = SubResource("Gradient_ql3qm")
+
 [sub_resource type="Curve" id="Curve_ub0gr"]
 _data = [Vector2(0.04661017, 0), 0.0, 14.363297, 0, 0, Vector2(0.26694918, 1), 1.0994798, 1.0994798, 0, 0, Vector2(0.8305085, 0.9101124), -1.1364369, -1.1364369, 0, 0, Vector2(1, 0.04494381), 0.0, 0.0, 0, 0]
 point_count = 4
@@ -37,23 +44,26 @@ curve = SubResource("Curve_ub0gr")
 particle_flag_disable_z = true
 emission_shape = 1
 emission_sphere_radius = 15.88
-angle_min = -99.899994
-angle_max = 100.000015
+angle_min = -310.1
+angle_max = 326.00003
 spread = 0.0
 gravity = Vector3(0, -98, 0)
 linear_accel_min = -60.58
 linear_accel_max = 45.26
 radial_accel_min = -38.690002
 radial_accel_max = 10.219997
-tangential_accel_min = -57.010002
-tangential_accel_max = 56.279995
+tangential_accel_min = -80.0
+tangential_accel_max = 79.99999
 damping_min = 10.0
 damping_max = 30.000002
 scale_min = 0.099999994
 scale_max = 0.19999999
 scale_curve = SubResource("CurveTexture_7ouqp")
 color = Color(0.16862746, 0.69803923, 0.29411766, 0.26666668)
+color_ramp = SubResource("GradientTexture1D_ub0gr")
 alpha_curve = SubResource("CurveTexture_ub0gr")
+hue_variation_min = -0.20000002
+hue_variation_max = 0.19999997
 
 [node name="OmnitrixUpgradeSelector" type="Control" unique_id=1431997802]
 layout_mode = 3
@@ -63,9 +73,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_s7uw5")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=355787344]
-layout_mode = 1
 
 [node name="Hand" type="TextureRect" parent="." unique_id=841726517]
 texture_filter = 1
@@ -81,19 +88,44 @@ offset_bottom = -365.7317
 grow_vertical = 0
 scale = Vector2(4.9200006, 4.9200006)
 texture = ExtResource("1_6yw06")
+expand_mode = 1
 
 [node name="Beam" type="Polygon2D" parent="Hand" unique_id=1105964674]
-position = Vector2(0.40650403, 0)
+position = Vector2(0.40650403, 9.349592)
+scale = Vector2(1, 0.75000006)
 color = Color(0.16862746, 0.69803923, 0.29411766, 0.26666668)
 texture = SubResource("GradientTexture2D_m8j0n")
-polygon = PackedVector2Array(85.77235, 37.39837, 29.26829, -39.837395, 138.61787, -40.85366)
+polygon = PackedVector2Array(85.77235, 37.39837, 70.52845, -39.837395, 101.2195, -39.837402)
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Hand" unique_id=293543211]
 modulate = Color(0.16862746, 0.69803923, 0.29411766, 1)
-position = Vector2(85.9756, 38.61788)
-amount = 32
+position = Vector2(86.58536, 35.772354)
+amount = 16
 texture = ExtResource("4_ub0gr")
 lifetime = 4.0
 randomness = 0.2
 visibility_rect = Rect2(-200, -100, 200, 200)
 process_material = SubResource("ParticleProcessMaterial_7ouqp")
+
+[node name="ProjectionIcon" type="TextureRect" parent="." unique_id=547142326]
+layout_mode = 0
+offset_left = 383.0
+offset_top = 424.0
+offset_right = 423.0
+offset_bottom = 464.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=106611506]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="UpgradeCard" type="Panel" parent="HBoxContainer" unique_id=1026277789]
+layout_mode = 2
+
+[node name="UpgradeCard2" type="Panel" parent="HBoxContainer" unique_id=881964936]
+layout_mode = 2
+
+[node name="UpgradeCard3" type="Panel" parent="HBoxContainer" unique_id=1790666365]
+layout_mode = 2
+
+[node name="LightningCanvas" type="Node2D" parent="." unique_id=1123141533]

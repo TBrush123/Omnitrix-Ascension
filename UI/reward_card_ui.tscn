@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://svdqev4j2r02"]
+
+[ext_resource type="Script" uid="uid://brfj88psj7oiu" path="res://UI/reward_card_ui.gd" id="1_hxsyl"]
+
+[node name="RewardCardUI" type="PanelContainer" unique_id=1682882607]
+offset_right = 40.0
+offset_bottom = 93.0
+script = ExtResource("1_hxsyl")
+type_labels = Dictionary[int, String]({
+0: "New DNA Sequence",
+1: "Upgrade",
+2: "Skill Up",
+3: "Item"
+})
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=908183217]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1133028649]
+layout_mode = 2
+
+[node name="RarityBar" type="ColorRect" parent="MarginContainer/VBoxContainer" unique_id=103675521]
+layout_mode = 2
+
+[node name="TypeBadge" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1429654347]
+layout_mode = 2
+
+[node name="ItemContainer" type="AspectRatioContainer" parent="MarginContainer/VBoxContainer" unique_id=2025637377]
+layout_mode = 2
+
+[node name="IconRect" type="TextureRect" parent="MarginContainer/VBoxContainer/ItemContainer" unique_id=607942863]
+layout_mode = 2
+
+[node name="CardName" type="Label" parent="MarginContainer/VBoxContainer" unique_id=487553676]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer" unique_id=1165488955]
+layout_mode = 2
+
+[node name="Description" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1392554559]
+layout_mode = 2

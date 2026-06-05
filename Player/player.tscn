@@ -21,11 +21,13 @@
 [ext_resource type="Script" uid="uid://b21dmnkdrqb7b" path="res://Player/Components/alien_charge_component.gd" id="16_lfmf2"]
 [ext_resource type="Resource" uid="uid://cjg2ob4h7h3uk" path="res://Player/Aliens/cannonbolt/cannonbolt.tres" id="17_n471f"]
 [ext_resource type="Script" uid="uid://r4mtcyerb8ff" path="res://Player/Components/momentum.gd" id="21_7emwf"]
+[ext_resource type="Script" uid="uid://clgaexy8qi5pc" path="res://Player/player_camera.gd" id="22_hshwv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gs3sa"]
 size = Vector2(127, 123)
 
 [node name="Player" type="CharacterBody2D" unique_id=540199118]
+z_index = 1
 position = Vector2(-1, 0)
 script = ExtResource("1_gwnis")
 human_sprite = ExtResource("1_imvv5")
@@ -67,3 +69,6 @@ script = ExtResource("16_lfmf2")
 [node name="MomentumComponent" type="Node2D" parent="Components" unique_id=279046544]
 script = ExtResource("21_7emwf")
 metadata/_custom_type_script = "uid://r4mtcyerb8ff"
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1186518469]
+script = ExtResource("22_hshwv")

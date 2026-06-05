@@ -1,0 +1,99 @@
+[gd_scene format=3 uid="uid://bykn3jdqxjafu"]
+
+[ext_resource type="Texture2D" uid="uid://sk2h00e1mhs0" path="res://Assets/Misc/level_up_hand.png" id="1_6yw06"]
+[ext_resource type="Script" uid="uid://bn88o17erju08" path="res://UI/omnitrix_upgrade_selector.gd" id="1_s7uw5"]
+[ext_resource type="Shader" uid="uid://bwucd3wedofgs" path="res://UI/omnitrix_upgrade_selector.gdshader" id="2_ql3qm"]
+[ext_resource type="Texture2D" uid="uid://old2w4et0mif" path="res://Assets/Misc/Hourglass_fill.png" id="4_ub0gr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7ouqp"]
+shader = ExtResource("2_ql3qm")
+shader_parameter/glow_color = Color(0.3, 1, 0.3, 1)
+shader_parameter/glow_size = 3.0
+
+[sub_resource type="Gradient" id="Gradient_s7uw5"]
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_m8j0n"]
+gradient = SubResource("Gradient_s7uw5")
+fill_from = Vector2(0, 1)
+fill_to = Vector2(0, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="Curve" id="Curve_ql3qm"]
+_data = [Vector2(0, 0), 0.0, 2.8032103, 0, 0, Vector2(0.26694918, 1), 0.0, 0.0, 0, 0, Vector2(0.8305085, 0.82022476), -1.8414484, -1.8414484, 0, 0, Vector2(1, 0), -11.195991, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_ub0gr"]
+curve = SubResource("Curve_ql3qm")
+
+[sub_resource type="Curve" id="Curve_ub0gr"]
+_data = [Vector2(0.04661017, 0), 0.0, 14.363297, 0, 0, Vector2(0.26694918, 1), 1.0994798, 1.0994798, 0, 0, Vector2(0.8305085, 0.9101124), -1.1364369, -1.1364369, 0, 0, Vector2(1, 0.04494381), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_7ouqp"]
+curve = SubResource("Curve_ub0gr")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7ouqp"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 15.88
+angle_min = -99.899994
+angle_max = 100.000015
+spread = 0.0
+gravity = Vector3(0, -98, 0)
+linear_accel_min = -60.58
+linear_accel_max = 45.26
+radial_accel_min = -38.690002
+radial_accel_max = 10.219997
+tangential_accel_min = -57.010002
+tangential_accel_max = 56.279995
+damping_min = 10.0
+damping_max = 30.000002
+scale_min = 0.099999994
+scale_max = 0.19999999
+scale_curve = SubResource("CurveTexture_7ouqp")
+color = Color(0.16862746, 0.69803923, 0.29411766, 0.26666668)
+alpha_curve = SubResource("CurveTexture_ub0gr")
+
+[node name="OmnitrixUpgradeSelector" type="Control" unique_id=1431997802]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_s7uw5")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=355787344]
+layout_mode = 1
+
+[node name="Hand" type="TextureRect" parent="." unique_id=841726517]
+texture_filter = 1
+material = SubResource("ShaderMaterial_7ouqp")
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = -459.0
+offset_right = 187.53658
+offset_bottom = -365.7317
+grow_vertical = 0
+scale = Vector2(4.9200006, 4.9200006)
+texture = ExtResource("1_6yw06")
+
+[node name="Beam" type="Polygon2D" parent="Hand" unique_id=1105964674]
+position = Vector2(0.40650403, 0)
+color = Color(0.16862746, 0.69803923, 0.29411766, 0.26666668)
+texture = SubResource("GradientTexture2D_m8j0n")
+polygon = PackedVector2Array(85.77235, 37.39837, 29.26829, -39.837395, 138.61787, -40.85366)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Hand" unique_id=293543211]
+modulate = Color(0.16862746, 0.69803923, 0.29411766, 1)
+position = Vector2(85.9756, 38.61788)
+amount = 32
+texture = ExtResource("4_ub0gr")
+lifetime = 4.0
+randomness = 0.2
+visibility_rect = Rect2(-200, -100, 200, 200)
+process_material = SubResource("ParticleProcessMaterial_7ouqp")

@@ -1,13 +1,13 @@
 class_name DungeonGenerator
 extends RefCounted
 
-const ROOM_SIZE: Vector2 = Vector2(320, 240) # Assuming all rooms are the same size for simplicity
-const PLACE_RADIUS: float = 500.0 # Minimum distance between room centers
-const PLACE_JITTER: float = 80.0 # Random offset applied to room positions
+const ROOM_SIZE: Vector2 = Vector2(1280, 960) # Assuming all rooms are the same size for simplicity
+const PLACE_RADIUS: float = 2000.0 # Minimum distance between room centers
+const PLACE_JITTER: float = 320.0 # Random offset applied to room positions
 const BONUS_CONNECTION_CHANCE: float = 0.35 # Chance to add extra connections between rooms
-const BONUS_CONNECTION_RADIUS: float = 450.0 # Max distance for bonus connections
-const ROOM_COUNT_MIN: int = 7
-const ROOM_COUNT_MAX: int = 10
+const BONUS_CONNECTION_RADIUS: float = 1800.0 # Max distance for bonus connections
+const ROOM_COUNT_MIN: int = 4
+const ROOM_COUNT_MAX: int = 5
 const MAX_PLACE_ATTEMPTS: int = 50
 
 var rooms: Array[RoomNode] = []

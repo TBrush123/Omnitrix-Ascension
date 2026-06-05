@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://blb2h2b0d2gvm"]
+
+[ext_resource type="Script" uid="uid://dtlq4bc1vkjw3" path="res://Rooms/room_template.gd" id="1_sxgf5"]
+
+[node name="RoomTemplate" type="Node2D" unique_id=2019069221]
+script = ExtResource("1_sxgf5")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=438764406]
+
+[node name="Markers" type="Node2D" parent="." unique_id=165346481]
+
+[node name="DoorNorth" type="Marker2D" parent="Markers" unique_id=2058492749]
+
+[node name="DoorSouth" type="Marker2D" parent="Markers" unique_id=431534480]
+
+[node name="DoorWest" type="Marker2D" parent="Markers" unique_id=1514400432]
+
+[node name="DoorEast" type="Marker2D" parent="Markers" unique_id=1870887182]

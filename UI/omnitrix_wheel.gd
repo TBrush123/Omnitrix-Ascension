@@ -14,7 +14,8 @@ extends Control
 @export var alien_icons: Node2D
 @export var error_icon: Texture2D
 @export var switch_cooldown: float = 0.25
-
+@export var hand_texture: Sprite2D
+@export var wheel_texture: TextureRect
 
 var switch_timer: float = 0.0
 var is_active: bool = false
@@ -73,13 +74,19 @@ func _process(delta):
 
 	if Input.is_action_pressed("ui_right"):
 		dir = 1
+		
 	elif Input.is_action_pressed("ui_left"):
 		dir = -1
 	else:
 		dir = 0
+		
 
 	if dir != 0 and is_active:
 		# Reset hold state if direction changed
+		var tween = create_tween().set_parallel(true).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+
+		tween.tween_property(hand_texture, "offset", Vector2(-8, 0) if dir == -1 else Vector2(8, 0), 0.2)
+		tween.tween_property(hand_texture, "rotation", deg_to_rad(-15) if dir == -1 else deg_to_rad(10), 0.2)
 		if dir != _prev_dir:
 			_hold_timer = 0.0
 			_has_repeated = false
@@ -101,6 +108,11 @@ func _process(delta):
 		_hold_timer   = 0.0
 		_has_repeated = false
 		_prev_dir = 0
+
+	if dir == 0 and is_active:
+		var tween = create_tween().set_parallel(true).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+		tween.tween_property(hand_texture, "offset", Vector2(0, 0), 0.2)
+		tween.tween_property(hand_texture, "rotation", 0, 0.2)
 
 	if switch_timer > 0.0:
 		switch_timer -= delta
@@ -155,6 +167,7 @@ func toggle_wheel(should_show: bool):
 	else:
 		# Shrink and fade away
 		var shrink_tween = create_tween().set_parallel(true).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
+		tween.tween_property(hand_texture, "offset", Vector2(0, 15), 0.2)
 		shrink_tween.tween_property(self, "modulate:a", 0.0, 0.2)
 		shrink_tween.chain().tween_callback(hide)
 

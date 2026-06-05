@@ -1,37 +1,43 @@
 [gd_scene format=3 uid="uid://b2rgcpt4c4s8g"]
 
+[ext_resource type="Script" uid="uid://mq3pd0tfpphf" path="res://main_game.gd" id="1_dugkq"]
 [ext_resource type="PackedScene" uid="uid://7m6hoeihd4l" path="res://Player/player.tscn" id="1_yx7mw"]
 [ext_resource type="PackedScene" uid="uid://ca51qv0r437do" path="res://UI/omnitrix_wheel.tscn" id="2_ykeeq"]
 [ext_resource type="PackedScene" uid="uid://kp566ecivo83" path="res://Enemies/enemy.tscn" id="3_ykeeq"]
-[ext_resource type="PackedScene" uid="uid://bianxfsm7www1" path="res://UI/hourglass_hud.tscn" id="4_6bm6p"]
+[ext_resource type="PackedScene" path="res://UI/hourglass_hud.tscn" id="4_6bm6p"]
 
 [node name="MainGame" type="Node2D" unique_id=13256596]
 position = Vector2(1, 0)
+script = ExtResource("1_dugkq")
 
 [node name="Enemy" parent="." unique_id=578988503 instance=ExtResource("3_ykeeq")]
 position = Vector2(1163, 605)
 
 [node name="Player" parent="." unique_id=540199118 node_paths=PackedStringArray("omnitrix_wheel", "charge_hud") instance=ExtResource("1_yx7mw")]
 position = Vector2(771, 656)
-omnitrix_wheel = NodePath("../UI/OmnitrixWheel")
-charge_hud = NodePath("../UI/HUD")
+omnitrix_wheel = NodePath("../CanvasLayer/UI/OmnitrixWheel")
+charge_hud = NodePath("../CanvasLayer/UI/HUD")
 
-[node name="UI" type="Control" parent="." unique_id=1541917459]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1943988060]
+
+[node name="UI" type="Control" parent="CanvasLayer" unique_id=1541917459]
 layout_mode = 3
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 1920.0
-offset_bottom = 1080.0
+offset_left = -1919.0
+offset_top = -1080.0
+offset_right = 1.0
 grow_horizontal = 0
 grow_vertical = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="OmnitrixWheel" parent="UI" unique_id=1076065873 instance=ExtResource("2_ykeeq")]
+[node name="OmnitrixWheel" parent="CanvasLayer/UI" unique_id=1076065873 instance=ExtResource("2_ykeeq")]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 
-[node name="HUD" parent="UI" unique_id=1459615035 instance=ExtResource("4_6bm6p")]
+[node name="HUD" parent="CanvasLayer/UI" unique_id=1459615035 instance=ExtResource("4_6bm6p")]
 layout_mode = 1

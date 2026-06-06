@@ -47,3 +47,6 @@ func force_detransform() -> void:
 	current_index = -1
 	_cooldown_remaining = switch_cooldown
 	emit_signal("alien_transform", null)
+
+func has_alien(alien: AlienData) -> bool:
+	return alien in aliens

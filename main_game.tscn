@@ -8,14 +8,6 @@
 [ext_resource type="Script" uid="uid://db4k1hvoi5242" path="res://Autoloads/run_manager.gd" id="6_2pltu"]
 [ext_resource type="PackedScene" uid="uid://bykn3jdqxjafu" path="res://UI/omnitrix_upgrade_selector.tscn" id="6_an1vu"]
 [ext_resource type="Script" uid="uid://ddi8ga4p1qgnf" path="res://Autoloads/game_data.gd" id="7_f52ns"]
-[ext_resource type="Script" uid="uid://dkiisy4yy88v5" path="res://Resources/alien_data.gd" id="8_qpaub"]
-[ext_resource type="Resource" uid="uid://4i1cm6rpykbb" path="res://Player/Aliens/Data/ripjaws.tres" id="9_an1vu"]
-[ext_resource type="Resource" uid="uid://dd8px7r1moxs3" path="res://Player/Aliens/Data/upgrade.tres" id="10_borgi"]
-[ext_resource type="Resource" uid="uid://bsnpv5yepfdy2" path="res://Player/Aliens/Data/fourarms.tres" id="11_ih6an"]
-[ext_resource type="Resource" uid="uid://bpaykseme8wv2" path="res://Player/Aliens/Data/stinkfly.tres" id="12_umrn2"]
-[ext_resource type="Resource" uid="uid://bi8qgof8qbojl" path="res://Player/Aliens/Data/wildmutt.tres" id="13_2i4tw"]
-[ext_resource type="Resource" uid="uid://bq661c5vffh3b" path="res://Player/Aliens/Data/xlr8.tres" id="14_euc45"]
-[ext_resource type="Resource" uid="uid://c51pkpajbpok1" path="res://Player/Aliens/Data/ghostfreak.tres" id="15_vn0ol"]
 [ext_resource type="Script" uid="uid://db6gfnd6d2cu2" path="res://World/current_rooms.gd" id="18_ih6an"]
 
 [node name="MainGame" type="Node2D" unique_id=13256596]
@@ -28,7 +20,6 @@ script = ExtResource("6_2pltu")
 
 [node name="GameData" type="Node" parent="Managers" unique_id=478275230]
 script = ExtResource("7_f52ns")
-alien_roster = Array[ExtResource("8_qpaub")]([ExtResource("9_an1vu"), ExtResource("10_borgi"), ExtResource("11_ih6an"), ExtResource("12_umrn2"), ExtResource("13_2i4tw"), ExtResource("14_euc45"), ExtResource("15_vn0ol")])
 
 [node name="World" type="Node2D" parent="." unique_id=2066852082]
 

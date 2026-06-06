@@ -1,11 +1,36 @@
 [gd_scene format=3 uid="uid://svdqev4j2r02"]
 
 [ext_resource type="Script" uid="uid://brfj88psj7oiu" path="res://UI/reward_card_ui.gd" id="1_hxsyl"]
+[ext_resource type="Texture2D" uid="uid://furvcgwkd3p5" path="res://Assets/Misc/Card_Back.png" id="2_jnxa7"]
+[ext_resource type="Texture2D" uid="uid://dmpvoo2u65f3" path="res://Assets/Misc/hexagon.png" id="3_bwqlj"]
+[ext_resource type="Texture2D" uid="uid://ccfgdq8glr5pr" path="res://Assets/Misc/pill.png" id="3_nuxhc"]
 
-[node name="RewardCardUI" type="PanelContainer" unique_id=1682882607]
-custom_minimum_size = Vector2(140, 190)
-offset_right = 40.0
-offset_bottom = 93.0
+[sub_resource type="LabelSettings" id="LabelSettings_nuxhc"]
+font_size = 18
+outline_size = 1
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 0
+shadow_color = Color(0, 0, 0, 0.27800003)
+stacked_outline_count = 1
+
+[sub_resource type="LabelSettings" id="LabelSettings_52vn1"]
+font_size = 14
+outline_size = 1
+outline_color = Color(0, 0, 0, 1)
+shadow_color = Color(0, 0, 0, 0.578)
+
+[sub_resource type="LabelSettings" id="LabelSettings_qhpy6"]
+font_size = 21
+outline_size = 1
+outline_color = Color(0, 0, 0, 1)
+shadow_color = Color(0, 0, 0, 0.26500002)
+
+[node name="RewardCardUI" type="Control" unique_id=2086878565]
+custom_minimum_size = Vector2(300, 420)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 220.0
+offset_bottom = 308.0
 pivot_offset = Vector2(70, 95)
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -24,32 +49,180 @@ type_labels = Dictionary[int, String]({
 2: "Skill Up",
 3: "Item"
 })
+rarity_names = Dictionary[int, String]({
+0: "Common",
+1: "Uncommon",
+2: "Rare",
+3: "Epic",
+4: "Legendary",
+5: "???"
+})
 
-[node name="MarginContainer" type="MarginContainer" parent="." unique_id=908183217]
-layout_mode = 2
+[node name="CardBase" type="NinePatchRect" parent="." unique_id=1446628153]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_jnxa7")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1133028649]
-layout_mode = 2
+[node name="MarginContainer2" type="MarginContainer" parent="." unique_id=963589784]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -18.0
+offset_right = 18.0
+offset_bottom = 44.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 12
 
-[node name="RarityBar" type="ColorRect" parent="MarginContainer/VBoxContainer" unique_id=103675521]
+[node name="RarityPill" type="NinePatchRect" parent="MarginContainer2" unique_id=251646222]
+texture_filter = 1
 layout_mode = 2
+texture = ExtResource("3_nuxhc")
+patch_margin_left = 12
+patch_margin_top = 10
+patch_margin_right = 12
+patch_margin_bottom = 10
 
-[node name="TypeBadge" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1429654347]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer2" unique_id=27890182]
 layout_mode = 2
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3
 
-[node name="ItemContainer" type="AspectRatioContainer" parent="MarginContainer/VBoxContainer" unique_id=2025637377]
+[node name="RarityLabel" type="Label" parent="MarginContainer2/MarginContainer" unique_id=1405962463]
 layout_mode = 2
+size_flags_horizontal = 4
+text = "Hey, how are you?"
+label_settings = SubResource("LabelSettings_nuxhc")
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="IconRect" type="TextureRect" parent="MarginContainer/VBoxContainer/ItemContainer" unique_id=607942863]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=572566195]
+layout_mode = 1
+offset_left = 87.0
+offset_top = -17.0
+offset_right = 165.0
+offset_bottom = 111.0
+scale = Vector2(1.6, 1.6)
+theme_override_constants/margin_top = 40
+
+[node name="HexFrame" type="TextureRect" parent="MarginContainer" unique_id=2136874510]
+texture_filter = 1
 layout_mode = 2
-expand_mode = 3
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("3_bwqlj")
 stretch_mode = 5
 
-[node name="CardName" type="Label" parent="MarginContainer/VBoxContainer" unique_id=487553676]
-layout_mode = 2
+[node name="IconRect" type="TextureRect" parent="MarginContainer/HexFrame" unique_id=196341928]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5
 
-[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer" unique_id=1165488955]
-layout_mode = 2
+[node name="MarginContainer3" type="MarginContainer" parent="." unique_id=865632883]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -24.0
+offset_top = -137.0
+offset_right = 24.0
+offset_bottom = -93.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
 
-[node name="Description" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1392554559]
+[node name="DescBox" type="NinePatchRect" parent="MarginContainer3" unique_id=1762429964]
+texture_filter = 1
 layout_mode = 2
+texture = ExtResource("3_nuxhc")
+patch_margin_left = 12
+patch_margin_top = 10
+patch_margin_right = 12
+patch_margin_bottom = 10
+
+[node name="Label" type="Label" parent="MarginContainer3" unique_id=1593006312]
+custom_minimum_size = Vector2(190, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Hey, how are youo?"
+label_settings = SubResource("LabelSettings_52vn1")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="NameContainer" type="MarginContainer" parent="." unique_id=781729287]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -95.5
+offset_top = -3.0
+offset_right = 95.5
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NamePill" type="NinePatchRect" parent="NameContainer" unique_id=263782436]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("3_nuxhc")
+patch_margin_left = 12
+patch_margin_top = 10
+patch_margin_right = 12
+patch_margin_bottom = 10
+
+[node name="MarginContainer" type="MarginContainer" parent="NameContainer" unique_id=2101436177]
+layout_mode = 2
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3
+
+[node name="Label" type="Label" parent="NameContainer/MarginContainer" unique_id=1650393457]
+layout_mode = 2
+text = "Hey, how are you?"
+label_settings = SubResource("LabelSettings_qhpy6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SelectionGlow" type="ColorRect" parent="." unique_id=1543864775]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.15)

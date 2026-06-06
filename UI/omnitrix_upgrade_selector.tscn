@@ -116,10 +116,10 @@ process_material = SubResource("ParticleProcessMaterial_7ouqp")
 
 [node name="ProjectionIcon" type="TextureRect" parent="." unique_id=547142326]
 layout_mode = 0
-offset_left = 383.0
-offset_top = 424.0
-offset_right = 423.0
-offset_bottom = 464.0
+offset_left = 332.0
+offset_top = 389.0
+offset_right = 478.0
+offset_bottom = 535.0
 expand_mode = 3
 stretch_mode = 5
 

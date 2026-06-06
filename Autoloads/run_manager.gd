@@ -27,7 +27,8 @@ func build_reward_pool() -> Array[RewardCard]:
 		pool.append_array(_get_skill_upgrades(active_alien, 1))
 
 	# Chance of new alien or item
-	if randf() < 0.3:
+	if randf() < 1:
+		print("skibidi")
 		pool.append_array(_get_alien_unlocks(1))
 	else:
 		pool.append_array(_get_items(1))

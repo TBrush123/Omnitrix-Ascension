@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="RewardCard" format=3 uid="uid://chqysf6g6nm84"]
+
+[ext_resource type="Script" uid="uid://bjqienfa08722" path="res://Resources/reward_card.gd" id="1_p2b1f"]
+[ext_resource type="Texture2D" uid="uid://5hc8sidek1js" path="res://Assets/Misc/Melee.svg" id="1_tvntr"]
+[ext_resource type="Script" uid="uid://boys7ma5fli78" path="res://Player/Components/stat_modifier.gd" id="2_tvntr"]
+
+[sub_resource type="Resource" id="Resource_8g54d"]
+script = ExtResource("2_tvntr")
+stat = "damage"
+value = 10.0
+source = "Card"
+metadata/_custom_type_script = "uid://boys7ma5fli78"
+
+[resource]
+script = ExtResource("1_p2b1f")
+card_name = "Damage up"
+description = "Increases the damage of all your attacks"
+icon = ExtResource("1_tvntr")
+card_type = 1
+stat_modifier = Array[ExtResource("2_tvntr")]([SubResource("Resource_8g54d"), null])
+metadata/_custom_type_script = "uid://bjqienfa08722"

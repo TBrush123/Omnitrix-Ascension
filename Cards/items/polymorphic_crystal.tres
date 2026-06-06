@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="RewardCard" format=3 uid="uid://cmtdovaixpqbg"]
+
+[ext_resource type="Texture2D" uid="uid://b651xu8m0k2k2" path="res://Assets/Misc/Polymorphic_Crystal.png" id="1_0y6qe"]
+[ext_resource type="Script" uid="uid://bjqienfa08722" path="res://Resources/reward_card.gd" id="1_6ridj"]
+[ext_resource type="Script" uid="uid://boys7ma5fli78" path="res://Player/Components/stat_modifier.gd" id="2_0y6qe"]
+
+[sub_resource type="PackedScene" id="PackedScene_640xx"]
+
+[resource]
+script = ExtResource("1_6ridj")
+card_name = "Polymorphic Crystal"
+description = "Unlocks Ultimate forms. Hold transform to go Ultimate."
+icon = ExtResource("1_0y6qe")
+card_type = 3
+rarity = 4
+item_scene = SubResource("PackedScene_640xx")
+metadata/_custom_type_script = "uid://bjqienfa08722"

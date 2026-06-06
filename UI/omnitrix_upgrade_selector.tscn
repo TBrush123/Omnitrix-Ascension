@@ -3,7 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://sk2h00e1mhs0" path="res://Assets/Misc/level_up_hand.png" id="1_6yw06"]
 [ext_resource type="Script" uid="uid://bn88o17erju08" path="res://UI/omnitrix_upgrade_selector.gd" id="1_s7uw5"]
 [ext_resource type="Shader" uid="uid://bwucd3wedofgs" path="res://UI/omnitrix_upgrade_selector.gdshader" id="2_ql3qm"]
+[ext_resource type="PackedScene" uid="uid://svdqev4j2r02" path="res://UI/reward_card_ui.tscn" id="2_ub0gr"]
 [ext_resource type="Texture2D" uid="uid://old2w4et0mif" path="res://Assets/Misc/Hourglass_fill.png" id="4_ub0gr"]
+[ext_resource type="Script" uid="uid://cw08j2qs0v0i6" path="res://UI/lightning_canvas.gd" id="7_umex2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7ouqp"]
 shader = ExtResource("2_ql3qm")
@@ -65,41 +67,46 @@ alpha_curve = SubResource("CurveTexture_ub0gr")
 hue_variation_min = -0.20000002
 hue_variation_max = 0.19999997
 
-[node name="OmnitrixUpgradeSelector" type="Control" unique_id=1431997802]
+[node name="RewardScreen" type="Control" unique_id=1431997802]
+clip_contents = true
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+mouse_filter = 1
 script = ExtResource("1_s7uw5")
+card_ui_scene = ExtResource("2_ub0gr")
 
-[node name="Hand" type="TextureRect" parent="." unique_id=841726517]
+[node name="OmnitrixHand" type="TextureRect" parent="." unique_id=841726517]
 texture_filter = 1
 material = SubResource("ShaderMaterial_7ouqp")
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 1.0
-offset_top = -459.0
-offset_right = 187.53658
-offset_bottom = -365.7317
+offset_top = -100.0
+offset_right = 300.0
 grow_vertical = 0
 scale = Vector2(4.9200006, 4.9200006)
+pivot_offset = Vector2(75, 100)
 texture = ExtResource("1_6yw06")
 expand_mode = 1
+stretch_mode = 5
 
-[node name="Beam" type="Polygon2D" parent="Hand" unique_id=1105964674]
-position = Vector2(0.40650403, 9.349592)
+[node name="Beam" type="Polygon2D" parent="OmnitrixHand" unique_id=1105964674]
+position = Vector2(56.09756, 9.349592)
 scale = Vector2(1, 0.75000006)
 color = Color(0.16862746, 0.69803923, 0.29411766, 0.26666668)
 texture = SubResource("GradientTexture2D_m8j0n")
 polygon = PackedVector2Array(85.77235, 37.39837, 70.52845, -39.837395, 101.2195, -39.837402)
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="Hand" unique_id=293543211]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="OmnitrixHand" unique_id=293543211]
 modulate = Color(0.16862746, 0.69803923, 0.29411766, 1)
-position = Vector2(86.58536, 35.772354)
+position = Vector2(142.27641, 35.772354)
 amount = 16
 texture = ExtResource("4_ub0gr")
 lifetime = 4.0
@@ -113,19 +120,37 @@ offset_left = 383.0
 offset_top = 424.0
 offset_right = 423.0
 offset_bottom = 464.0
+expand_mode = 3
+stretch_mode = 5
 
-[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=106611506]
+[node name="CardsContainer" type="HBoxContainer" parent="." unique_id=106611506]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -20.0
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="UpgradeCard" type="Panel" parent="CardsContainer" unique_id=1026277789]
+layout_mode = 2
+
+[node name="UpgradeCard2" type="Panel" parent="CardsContainer" unique_id=881964936]
+layout_mode = 2
+
+[node name="UpgradeCard3" type="Panel" parent="CardsContainer" unique_id=1790666365]
+layout_mode = 2
+
+[node name="CardTypeLabel" type="Label" parent="." unique_id=1357211589]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 90.0
+offset_top = -80.0
+offset_right = 751.0
+offset_bottom = 423.0
 
-[node name="UpgradeCard" type="Panel" parent="HBoxContainer" unique_id=1026277789]
-layout_mode = 2
-
-[node name="UpgradeCard2" type="Panel" parent="HBoxContainer" unique_id=881964936]
-layout_mode = 2
-
-[node name="UpgradeCard3" type="Panel" parent="HBoxContainer" unique_id=1790666365]
-layout_mode = 2
-
-[node name="LightningCanvas" type="Node2D" parent="." unique_id=1123141533]
+[node name="LightningCanvas" type="Node2D" parent="." unique_id=839554071]
+script = ExtResource("7_umex2")

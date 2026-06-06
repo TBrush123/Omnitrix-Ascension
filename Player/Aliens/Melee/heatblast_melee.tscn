@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b77cr7x5ay0bo"]
 
-[ext_resource type="Script" uid="uid://co6ng3h1c23ip" path="res://Player/Aliens/heatblast/heatblast_melee.gd" id="1_8brvp"]
+[ext_resource type="Script" uid="uid://co6ng3h1c23ip" path="res://Player/Aliens/Melee/heatblast_melee.gd" id="1_522gi"]
 [ext_resource type="Texture2D" uid="uid://dxbep431qnek2" path="res://Assets/Alien Attacks/XLR8Melee.png" id="2_cus17"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_83abr"]
@@ -8,7 +8,7 @@ radius = 58.0
 height = 316.0
 
 [node name="HeatblastMelee" type="Area2D" unique_id=105833014]
-script = ExtResource("1_8brvp")
+script = ExtResource("1_522gi")
 lifetime = 0.18
 metadata/_custom_type_script = "uid://ybmrvp0w6w3c"
 

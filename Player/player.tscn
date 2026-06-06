@@ -6,20 +6,11 @@
 [ext_resource type="Script" uid="uid://ct3lnikh55pjt" path="res://Player/Components/OmnitrixComponent.gd" id="4_fhl08"]
 [ext_resource type="Script" path="res://Player/Components/invincibility_component.gd" id="4_o28un"]
 [ext_resource type="Script" uid="uid://dkiisy4yy88v5" path="res://Resources/alien_data.gd" id="5_k53q1"]
-[ext_resource type="Resource" uid="uid://bq661c5vffh3b" path="res://Player/Aliens/xlr8/xlr8.tres" id="6_fhl08"]
-[ext_resource type="Resource" uid="uid://dpdpnaqsht8ql" path="res://Player/Aliens/heatblast/heatblast.tres" id="7_od3ui"]
+[ext_resource type="Resource" uid="uid://bq661c5vffh3b" path="res://Player/Aliens/Data/xlr8.tres" id="7_p5o4e"]
 [ext_resource type="Script" uid="uid://ogoiyocu8xvv" path="res://Player/Components/PlayerStats.gd" id="7_vtle1"]
-[ext_resource type="Resource" uid="uid://bpaykseme8wv2" path="res://Player/Aliens/stinkfly.tres" id="8_x3vf3"]
-[ext_resource type="Resource" uid="uid://bi8qgof8qbojl" path="res://Player/Aliens/wildmutt.tres" id="9_apopc"]
-[ext_resource type="Resource" uid="uid://dd8px7r1moxs3" path="res://Player/Aliens/upgrade.tres" id="10_apopc"]
-[ext_resource type="Resource" uid="uid://bjxamx3t3ua3w" path="res://Player/Aliens/diamondhead.tres" id="11_gu6f8"]
-[ext_resource type="Resource" uid="uid://bsnpv5yepfdy2" path="res://Player/Aliens/fourarms.tres" id="12_dkpta"]
-[ext_resource type="Resource" uid="uid://c51pkpajbpok1" path="res://Player/Aliens/ghostfreak.tres" id="13_lfmf2"]
-[ext_resource type="Resource" uid="uid://4i1cm6rpykbb" path="res://Player/Aliens/ripjaws.tres" id="14_pisgm"]
-[ext_resource type="Resource" uid="uid://cxy1wckw2rrlg" path="res://Player/Aliens/greymatter/greymatter.tres" id="15_b1ygp"]
+[ext_resource type="Resource" uid="uid://dd8px7r1moxs3" path="res://Player/Aliens/Data/upgrade.tres" id="8_gu6f8"]
 [ext_resource type="Script" uid="uid://bjyuue8v1oqsm" path="res://Skills/skill_executor.gd" id="15_dkpta"]
 [ext_resource type="Script" uid="uid://b21dmnkdrqb7b" path="res://Player/Components/alien_charge_component.gd" id="16_lfmf2"]
-[ext_resource type="Resource" uid="uid://cjg2ob4h7h3uk" path="res://Player/Aliens/cannonbolt/cannonbolt.tres" id="17_n471f"]
 [ext_resource type="Script" uid="uid://r4mtcyerb8ff" path="res://Player/Components/momentum.gd" id="21_7emwf"]
 [ext_resource type="Script" uid="uid://clgaexy8qi5pc" path="res://Player/player_camera.gd" id="22_hshwv"]
 
@@ -54,7 +45,7 @@ script = ExtResource("4_o28un")
 [node name="OmnitrixComponent" type="Node2D" parent="Components" unique_id=1814936505]
 position = Vector2(8, 0)
 script = ExtResource("4_fhl08")
-aliens = Array[ExtResource("5_k53q1")]([ExtResource("6_fhl08"), ExtResource("7_od3ui"), ExtResource("8_x3vf3"), ExtResource("9_apopc"), ExtResource("10_apopc"), ExtResource("11_gu6f8"), ExtResource("12_dkpta"), ExtResource("13_lfmf2"), ExtResource("14_pisgm"), ExtResource("15_b1ygp"), ExtResource("17_n471f")])
+aliens = Array[ExtResource("5_k53q1")]([ExtResource("7_p5o4e"), ExtResource("8_gu6f8")])
 
 [node name="PlayerStats" type="Node2D" parent="Components" unique_id=1533456369]
 script = ExtResource("7_vtle1")

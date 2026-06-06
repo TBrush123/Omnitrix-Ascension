@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://st3ughxgn8op"]
 
-[ext_resource type="Script" uid="uid://bouo607o66dia" path="res://Player/Aliens/greymatter/greymatter_melee.gd" id="1_cxm3f"]
+[ext_resource type="Script" uid="uid://bouo607o66dia" path="res://Player/Aliens/Melee/greymatter_melee.gd" id="1_cxm3f"]
 [ext_resource type="Texture2D" uid="uid://bydged4y4kf5o" path="res://Assets/Alien Attacks/fireball.png" id="2_ilmty"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ilmty"]

@@ -5,22 +5,47 @@
 [ext_resource type="PackedScene" uid="uid://ca51qv0r437do" path="res://UI/omnitrix_wheel.tscn" id="2_ykeeq"]
 [ext_resource type="PackedScene" uid="uid://kp566ecivo83" path="res://Enemies/enemy.tscn" id="3_ykeeq"]
 [ext_resource type="PackedScene" path="res://UI/hourglass_hud.tscn" id="4_6bm6p"]
+[ext_resource type="Script" uid="uid://db4k1hvoi5242" path="res://Autoloads/run_manager.gd" id="6_2pltu"]
+[ext_resource type="PackedScene" uid="uid://bykn3jdqxjafu" path="res://UI/omnitrix_upgrade_selector.tscn" id="6_an1vu"]
+[ext_resource type="Script" uid="uid://ddi8ga4p1qgnf" path="res://Autoloads/game_data.gd" id="7_f52ns"]
+[ext_resource type="Script" uid="uid://dkiisy4yy88v5" path="res://Resources/alien_data.gd" id="8_qpaub"]
+[ext_resource type="Resource" uid="uid://4i1cm6rpykbb" path="res://Player/Aliens/Data/ripjaws.tres" id="9_an1vu"]
+[ext_resource type="Resource" uid="uid://dd8px7r1moxs3" path="res://Player/Aliens/Data/upgrade.tres" id="10_borgi"]
+[ext_resource type="Resource" uid="uid://bsnpv5yepfdy2" path="res://Player/Aliens/Data/fourarms.tres" id="11_ih6an"]
+[ext_resource type="Resource" uid="uid://bpaykseme8wv2" path="res://Player/Aliens/Data/stinkfly.tres" id="12_umrn2"]
+[ext_resource type="Resource" uid="uid://bi8qgof8qbojl" path="res://Player/Aliens/Data/wildmutt.tres" id="13_2i4tw"]
+[ext_resource type="Resource" uid="uid://bq661c5vffh3b" path="res://Player/Aliens/Data/xlr8.tres" id="14_euc45"]
+[ext_resource type="Resource" uid="uid://c51pkpajbpok1" path="res://Player/Aliens/Data/ghostfreak.tres" id="15_vn0ol"]
+[ext_resource type="Script" uid="uid://db6gfnd6d2cu2" path="res://World/current_rooms.gd" id="18_ih6an"]
 
 [node name="MainGame" type="Node2D" unique_id=13256596]
-position = Vector2(1, 0)
 script = ExtResource("1_dugkq")
 
-[node name="Enemy" parent="." unique_id=578988503 instance=ExtResource("3_ykeeq")]
+[node name="Managers" type="Node" parent="." unique_id=1680155030]
+
+[node name="RunManager" type="Node" parent="Managers" unique_id=1441232773]
+script = ExtResource("6_2pltu")
+
+[node name="GameData" type="Node" parent="Managers" unique_id=478275230]
+script = ExtResource("7_f52ns")
+alien_roster = Array[ExtResource("8_qpaub")]([ExtResource("9_an1vu"), ExtResource("10_borgi"), ExtResource("11_ih6an"), ExtResource("12_umrn2"), ExtResource("13_2i4tw"), ExtResource("14_euc45"), ExtResource("15_vn0ol")])
+
+[node name="World" type="Node2D" parent="." unique_id=2066852082]
+
+[node name="Enemy" parent="World" unique_id=578988503 instance=ExtResource("3_ykeeq")]
 position = Vector2(1163, 605)
 
-[node name="Player" parent="." unique_id=540199118 node_paths=PackedStringArray("omnitrix_wheel", "charge_hud") instance=ExtResource("1_yx7mw")]
+[node name="Player" parent="World" unique_id=540199118 node_paths=PackedStringArray("omnitrix_wheel", "charge_hud") instance=ExtResource("1_yx7mw")]
 position = Vector2(771, 656)
-omnitrix_wheel = NodePath("../CanvasLayer/UI/OmnitrixWheel")
-charge_hud = NodePath("../CanvasLayer/UI/HUD")
+omnitrix_wheel = NodePath("../../GameUI/HUD/OmnitrixWheel")
+charge_hud = NodePath("../../GameUI/HUD/AlienChargeHUD")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1943988060]
+[node name="CurrentRooms" type="Node2D" parent="World" unique_id=362484152]
+script = ExtResource("18_ih6an")
 
-[node name="UI" type="Control" parent="CanvasLayer" unique_id=1541917459]
+[node name="GameUI" type="CanvasLayer" parent="." unique_id=1943988060]
+
+[node name="HUD" type="Control" parent="GameUI" unique_id=1541917459]
 layout_mode = 3
 anchors_preset = 3
 anchor_left = 1.0
@@ -35,9 +60,12 @@ grow_vertical = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="OmnitrixWheel" parent="CanvasLayer/UI" unique_id=1076065873 instance=ExtResource("2_ykeeq")]
+[node name="OmnitrixWheel" parent="GameUI/HUD" unique_id=1076065873 instance=ExtResource("2_ykeeq")]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 
-[node name="HUD" parent="CanvasLayer/UI" unique_id=1459615035 instance=ExtResource("4_6bm6p")]
+[node name="AlienChargeHUD" parent="GameUI/HUD" unique_id=1459615035 instance=ExtResource("4_6bm6p")]
 layout_mode = 1
+
+[node name="RewardScreen" parent="GameUI" unique_id=1431997802 instance=ExtResource("6_an1vu")]
+visible = false

@@ -12,6 +12,7 @@ size = Vector2(128, 128)
 size = Vector2(98, 96)
 
 [node name="Enemy" type="CharacterBody2D" unique_id=578988503 node_paths=PackedStringArray("health_component") groups=["enemy", "robot"]]
+z_index = 1
 script = ExtResource("1_47qgu")
 health_component = NodePath("HealthComponent")
 

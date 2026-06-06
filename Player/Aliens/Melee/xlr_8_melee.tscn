@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://015b2jj1dbc1"]
 
-[ext_resource type="Script" uid="uid://dtffbk62djcnr" path="res://Player/Aliens/xlr8/xlr_8_melee.gd" id="1_tetca"]
+[ext_resource type="Script" uid="uid://dtffbk62djcnr" path="res://Player/Aliens/Melee/xlr_8_melee.gd" id="1_tetca"]
 [ext_resource type="Texture2D" uid="uid://dxbep431qnek2" path="res://Assets/Alien Attacks/XLR8Melee.png" id="2_ou2au"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tpdjs"]

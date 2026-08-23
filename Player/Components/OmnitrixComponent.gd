@@ -50,3 +50,11 @@ func force_detransform() -> void:
 
 func has_alien(alien: AlienData) -> bool:
 	return alien in aliens
+
+func add_alien(alien: AlienData) -> void:
+	if not has_alien(alien):
+		aliens.append(alien)
+
+func reset() -> void:
+	_wheel_open = false
+	omnitrix_wheel.reset()

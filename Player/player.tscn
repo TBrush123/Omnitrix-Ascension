@@ -17,9 +17,8 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gs3sa"]
 size = Vector2(127, 123)
 
-[node name="Player" type="CharacterBody2D" unique_id=540199118]
+[node name="Player" type="CharacterBody2D" unique_id=540199118 groups=["player"]]
 z_index = 1
-position = Vector2(-1, 0)
 script = ExtResource("1_gwnis")
 human_sprite = ExtResource("1_imvv5")
 
@@ -62,4 +61,5 @@ script = ExtResource("21_7emwf")
 metadata/_custom_type_script = "uid://r4mtcyerb8ff"
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1186518469]
+zoom = Vector2(1.2, 1.2)
 script = ExtResource("22_hshwv")

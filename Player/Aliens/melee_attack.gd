@@ -20,7 +20,7 @@ func _on_spawned() -> void:
 
 func _on_area_entered(area: Area2D) -> void:
 	print("HIT: ", area.name, " | groups: ", area.get_groups())
-	if not area.is_in_group('hitbox'):
+	if not area.is_in_group('hurtbox'):
 		return
 	var enemy = area.owner
 	if enemy in _hit_enemies:
@@ -28,8 +28,8 @@ func _on_area_entered(area: Area2D) -> void:
 	
 	_hit_enemies.append(enemy)
 
-	if enemy.has_node('HealthComponent'):
-		enemy.get_node('HealthComponent').take_damage(damage)
+	if enemy.has_method('take_damage'):
+		enemy.take_damage(damage)
 	
 	if enemy.has_method('apply_knockback'):
 		enemy.apply_knockback(direction, knockback_force)

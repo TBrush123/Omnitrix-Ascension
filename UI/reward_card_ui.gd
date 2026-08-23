@@ -21,6 +21,7 @@ var _card: RewardCard = null
 var _is_selected: bool = false
 
 func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	pivot_offset = size / 2.0
 	mouse_filter = Control.MOUSE_FILTER_STOP
 	selection_glow.visible = false

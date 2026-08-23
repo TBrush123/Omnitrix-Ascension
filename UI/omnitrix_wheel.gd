@@ -178,3 +178,7 @@ func transform(alien: AlienData):
 	tween.tween_property(self, "modulate:a", 0.0, 0.2)
 	tween.chain().tween_callback(hide)
 	is_active = false
+
+func reset():
+	for icon in range(alien_icons.get_child_count()):
+		alien_icons.get_child(icon).texture = find_alien_at_index(selected_index - HALF + icon)

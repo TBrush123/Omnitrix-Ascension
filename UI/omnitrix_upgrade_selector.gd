@@ -11,6 +11,7 @@ func _process(delta):
 @onready var cards_container: HBoxContainer = $CardsContainer
 @onready var lightning: LightningCanvas = $LightningCanvas
 @onready var card_label: Label = $CardTypeLabel
+@onready var omnitrix_placement: Marker2D = $OmnitrixPlacement
 
 @export var card_ui_scene: PackedScene
 
@@ -86,7 +87,7 @@ func _update_projection(card: RewardCard) -> void:
 		type_colors[card.card_type].b, 0.9), 0.15)
 	
 	tween.tween_property(projection_icon, "scale", Vector2(1.0, 1.0), 0.1).from(Vector2(0.8, 0.8))
-	tween.tween_property(projection_icon, "position:y", hand.position.y - 65, 0.18) \
+	tween.tween_property(projection_icon, "position:y", hand.position.y - 600, 0.18) \
 	.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 
 
@@ -98,8 +99,7 @@ func _confirm_selection() -> void:
 	chosen_ui.play_confirm_flash()
 
 	var card_pos = chosen_ui.global_position + chosen_ui.size / 2.0
-	var omnitrix_pos = hand.global_position + \
-		Vector2(hand.size.x * 0.35, hand.size.y * 0.45)
+	var omnitrix_pos = omnitrix_placement.global_position
 	
 	var rarity_colors = {
 		RewardCard.Rarity.COMMON:    Color(0.434, 0.434, 0.434),
@@ -115,10 +115,9 @@ func _confirm_selection() -> void:
 
 func hide_screen() -> void:
 	visible = false
-	process_mode = Node.PROCESS_MODE_DISABLED   # stops _input, _process, everything
+	process_mode = Node.PROCESS_MODE_DISABLED
 
 
-# When showing the screen
 func show_screen() -> void:
-	visible      = true
-	process_mode = Node.PROCESS_MODE_INHERIT
+	visible = true
+	process_mode = Node.PROCESS_MODE_ALWAYS

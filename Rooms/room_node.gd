@@ -8,6 +8,17 @@ enum Door {
     WEST
 }
 
+enum RoomType {
+    COMBAT,
+    EXIT,
+    ELITE,
+    TREASURE,
+    REST
+}
+
+@export var room_type: RoomType
+@export var scene: PackedScene
+
 class Connection:
     var to_room_id: int
     var door: Door
@@ -16,6 +27,7 @@ var id: int
 var position: Vector2
 var size: Vector2
 var data: RoomData = null
+var cleared: bool = false
 
 var connections: Array[Connection] = []
 var is_furthest: bool = false

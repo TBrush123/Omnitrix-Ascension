@@ -154,3 +154,6 @@ offset_bottom = 423.0
 
 [node name="LightningCanvas" type="Node2D" parent="." unique_id=839554071]
 script = ExtResource("7_umex2")
+
+[node name="OmnitrixPlacement" type="Marker2D" parent="." unique_id=185635862]
+position = Vector2(411, 783)

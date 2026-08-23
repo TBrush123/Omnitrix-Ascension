@@ -1,4 +1,7 @@
+class_name RoomRegistry
 extends Node
+
+static var _registry: Dictionary = {}
 
 @export var combat_rooms: Array[RoomData] = []
 @export var puzzle_rooms: Array[RoomData] = []
@@ -9,11 +12,10 @@ extends Node
 @export var boss_rooms: Array[RoomData] = []
 @export var exit_rooms: Array[RoomData] = []
 
-func get_random(type: RoomData.RoomType) -> RoomData:
-	var pool = _get_pool(type)
-	if pool.size() == 0:
-		return null
-	return _weighted_pick(pool)
+static func register(type: RoomData.RoomType, data: RoomData) -> void:
+	if not _registry.has(type):
+		_registry[type] = []
+	_registry[type].append(data)
 	
 func _get_pool(type: RoomData.RoomType) -> Array[RoomData]:
 	match type:
@@ -47,3 +49,18 @@ func _weighted_pick(pool: Array[RoomData]) -> RoomData:
 		if pick < cumulative:
 			return room
 	return pool[-1] # Fallback in case of rounding errors
+
+func get_random(type: RoomData.RoomType) -> RoomData:
+	if not _registry.has(type):
+		push_error("No rooms registered for type: %s" % str(type))
+		if not combat_rooms.is_empty():
+			return combat_rooms[0]
+		return null
+	var pool: Array[RoomData] = _registry[type]
+	return pool.pick_random()
+
+static func load_all() -> void:
+	var combat = RoomData.new()
+	combat.room_type = RoomData.RoomType.COMBAT
+	combat.scene = preload("res://Rooms/room_template.tscn")
+	register(RoomData.RoomType.COMBAT, combat)

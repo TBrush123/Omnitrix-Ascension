@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://dcyurakocsimf"]
+
+[ext_resource type="Texture2D" uid="uid://cpuaiwpjhms2l" path="res://icon.svg" id="1_1jiga"]
+[ext_resource type="Script" uid="uid://c0e5rjv3j7r5x" path="res://Enemies/chaser/chaser.gd" id="1_3x41c"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g4v7s"]
+radius = 44.0
+height = 94.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yf5fn"]
+radius = 57.0
+height = 114.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_57qmd"]
+radius = 57.0
+height = 114.0
+
+[node name="Chaser" type="CharacterBody2D" unique_id=1280993295]
+script = ExtResource("1_3x41c")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=696545551]
+modulate = Color(0, 0, 1, 1)
+texture = ExtResource("1_1jiga")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1966214425]
+shape = SubResource("CapsuleShape2D_g4v7s")
+
+[node name="Hurtbox" type="Area2D" parent="." unique_id=1528558012 groups=["hurtbox"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=661788122]
+shape = SubResource("CapsuleShape2D_yf5fn")
+
+[node name="ContactArea" type="Area2D" parent="." unique_id=228670232]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ContactArea" unique_id=45770058]
+shape = SubResource("CapsuleShape2D_57qmd")
